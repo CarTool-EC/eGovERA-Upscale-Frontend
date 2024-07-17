@@ -1,0 +1,302 @@
+<eui-card euiCollapsible euiNoContentPadding>
+    <eui-card-header>
+        <eui-card-header-title>
+            Digital Business Capability Portfolio Management
+        </eui-card-header-title>
+    </eui-card-header>
+    <eui-card-content>
+        <div class="row eui-u-mb-xl">
+            <div class="col">
+                <div id="tableId" class="eui-table__sticky-container" style="max-height: 500px;">
+                    <form [formGroup]="decisionSupportForm">
+                        <table euiTable euiTableResponsive hasStickyHeader [rows]="dataSource">
+                            <ng-template euiTemplate="header">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Domain</th>
+                                    <th>
+                                        <span class="eui-u-cursor-help" euiTooltip="It reports the strategic priority assigned to the digital business capability by the national digital agenda of the country">
+                                            Strategic Fit
+                                            <eui-icon-svg icon="eui-question-circle" set="eui" size="xs" fillColor="grey-100"></eui-icon-svg>
+                                        </span>
+                                    </th>
+                                    <th>
+                                        <span class="eui-u-cursor-help" euiTooltip="It reports the ability to support the Digital Business Capability">
+                                            Support Ability
+                                            <eui-icon-svg icon="eui-question-circle" set="eui" size="xs" fillColor="grey-100"></eui-icon-svg>
+                                        </span>
+                                    </th>
+                                    <th>
+                                        <span class="eui-u-cursor-help" euiTooltip="It reports the target prospective ability to support the Digital Business Capability">
+                                            Target Ability
+                                            <eui-icon-svg icon="eui-question-circle" set="eui" size="xs" fillColor="grey-100"></eui-icon-svg>
+                                        </span>
+                                    </th>
+                                    <th>
+                                        <span class="eui-u-cursor-help" euiTooltip="It reports the expected beneficial impact (cost discounted) provided by the target prospective ability to support">
+                                            Expected Public Value
+                                            <eui-icon-svg icon="eui-question-circle" set="eui" size="xs" fillColor="grey-100"></eui-icon-svg>
+                                        </span>
+                                    </th>
+                                    <th>
+                                        <span class="eui-u-cursor-help" euiTooltip="It reports the amount of Euros (Million of Euros) to be allocated for the Digital Business Capabilities implementation">
+                                            Estimated Budget (mill €)
+                                            <eui-icon-svg icon="eui-question-circle" set="eui" size="xs" fillColor="grey-100"></eui-icon-svg>
+                                        </span>
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template let-row euiTemplate="body">
+                                <tr>
+                                    <td data-col-label="Name">{{ row.Name }} </td>
+                                    <td data-col-label="Domain">{{ row.Policy }}</td>
+                                    <td data-col-label="Strategic Fit">
+                                        <select 
+                                            euiSelect
+                                            formControlName="{{row.Puri}}-StrategicFit"
+                                            (change)="editTable(row.Puri, 'StrategicFit')">
+                                            <option *ngFor="let option of selectableValues" [ngValue]="option">
+                                                {{ option }}
+                                            </option>
+                                        </select>
+                                        <!-- <input 
+                                            euiInputNumber 
+                                            min="0" 
+                                            max="5" 
+                                            formControlName="{{row.Puri}}-StrategicFit"
+                                            (change)="editTable(row.Puri, 'StrategicFit')"
+                                        /> -->
+                                    </td>
+                                     <td data-col-label="Support Ability">
+                                        <select 
+                                            euiSelect
+                                            formControlName="{{row.Puri}}-SupportAbility"
+                                            (change)="editTable(row.Puri, 'SupportAbility')">
+                                            <option *ngFor="let option of selectableValues" [ngValue]="option">
+                                                {{ option }}
+                                            </option>
+                                        </select>
+                                        <!-- <input 
+                                            euiInputNumber 
+                                            min="0" 
+                                            max="5" 
+                                            formControlName="{{row.Puri}}-SupportAbility"
+                                            (change)="editTable(row.Puri, 'SupportAbility')"
+                                        /> -->
+                                     </td>
+                                     <td data-col-label="Target Ability">
+                                        <select 
+                                            euiSelect
+                                            formControlName="{{row.Puri}}-TargetAbility"
+                                            (change)="editTable(row.Puri, 'TargetAbility')">
+                                            <option *ngFor="let option of selectableValues" [ngValue]="option">
+                                                {{ option }}
+                                            </option>
+                                        </select>
+                                        <!-- <input 
+                                            euiInputNumber 
+                                            min="0" 
+                                            max="5" 
+                                            formControlName="{{row.Puri}}-TargetAbility"
+                                            (change)="editTable(row.Puri, 'TargetAbility')"
+                                        /> -->
+                                     </td>
+                                     <td data-col-label="Expected Public Value">
+                                        <select 
+                                            euiSelect
+                                            formControlName="{{row.Puri}}-ExpectedPublicValue"
+                                            (change)="editTable(row.Puri, 'ExpectedPublicValue')">
+                                            <option *ngFor="let option of selectableValues" [ngValue]="option">
+                                                {{ option }}
+                                            </option>
+                                        </select>
+                                        <!-- <input 
+                                            euiInputNumber 
+                                            min="0" 
+                                            max="5" 
+                                            formControlName="{{row.Puri}}-ExpectedPublicValue"
+                                            (change)="editTable(row.Puri, 'ExpectedPublicValue')"
+                                        /> -->
+                                     </td>
+                                     <td data-col-label="Estimated Budget (mill €)">
+                                        <input 
+                                            euiInputNumber 
+                                            [fractionDigits]="3"
+                                            min="0" 
+                                            formControlName="{{row.Puri}}-EstimatedBudget"
+                                            (change)="editTable(row.Puri, 'EstimatedBudget')"
+                                        />
+                                     </td>
+                                </tr>
+                            </ng-template>
+                            <ng-template euiTemplate="footer">
+                                <tr>
+                                    <td colspan="6">
+                                        <div class="eui-u-font-xs eui-u-flex eui-u-flex-justify-content-start">
+                                            Edit the table to update the charts below. Hover over the column headers for more information.
+                                        </div>
+                                    </td>
+                                    <td data-col-label="Estimated Budget (mill €)">
+                                        <div class="eui-u-flex eui-u-flex-justify-content-start">
+                                            Total Budget: <span class="eui-u-ml-s eui-u-mr-m eui-u-font-bold">{{ totalBudget }}</span> mill €
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="eui-u-pl-m eui-u-pt-m">
+            <form [formGroup]="filterForm">
+                <div class="row" *ngIf="!isLoading">
+                    <div class="col-3 eui-u-inline-flex">
+                        <div euiInputGroup>
+                            <select 
+                                euiSelect
+                                id="domain-filter"
+                                name="domain-filter"
+                                placeholder="Policy domain"
+                                formControlName="domainFilter"
+                                (change)="onDomainFilterChange()">
+                                <option 
+                                    *ngFor="let option of domainOptions"
+                                    [ngValue]="option">
+                                    {{ option }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-3 eui-u-inline-flex">
+                        <div euiInputGroup>
+                            <select 
+                                euiSelect
+                                id="xAxis-filter"
+                                name="xAxis-filter"
+                                placeholder="Change the x axis"
+                                formControlName="xAxisFilter"
+                                (change)="onxAxisFilterChange()">
+                                <option 
+                                    *ngFor="let option of xAxisOptions"
+                                    [ngValue]="option.id">
+                                    {{ option.value }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="row" *ngIf="!isLoading">
+                <div class="col-12 col-lg-6" id="bubbleChartId">
+                    <canvas style="width: 500px; height: 500px;" baseChart [data]="bubbleChartData" [options]="bubbleChartOptions" [type]="'bubble'"
+                        (chartClick)="onBubbleClick($event)"></canvas>
+                </div>
+                <div class="col-12 col-lg-6" id="radarChartId">
+                    <canvas baseChart [data]="radarChartData" [options]="radarChartOptions" [type]="'radar'"></canvas>
+                </div>
+            </div>
+            <ng-container *ngIf="!isLoading">
+                <form [formGroup]="filterForm">
+                    <div class="row">
+                        <div class="col eui-u-inline-flex">
+                            Filter the Digital Business Capabilities with the following parameter:
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 eui-u-inline-flex">
+                            <div>
+                                Strategic Fit
+                            </div>
+                        </div>
+                        <div class="col-3 eui-u-inline-flex">
+                            <div class="eui-u-ml-l eui-u-width-1">
+                                {{filterForm.value['StrategicFitStart']}}
+                            </div>
+                            <div>
+                                <mat-slider min="1" max="5" step="0.1">
+                                    <input matSliderStartThumb formControlName="StrategicFitStart"
+                                        (change)="onSliderFilterChange()">
+                                    <input matSliderEndThumb formControlName="StrategicFitEnd"
+                                        (change)="onSliderFilterChange()">
+                                </mat-slider>
+                            </div>
+                            <div class="eui-u-ml-s eui-u-width-1">
+                                {{filterForm.value['StrategicFitEnd']}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 eui-u-inline-flex">
+                            <div>
+                                Expected Public Value
+                            </div>
+                        </div>
+                        <div class="col-3 eui-u-inline-flex">
+                            <div class="eui-u-ml-l eui-u-width-1">
+                                {{filterForm.value['ExpectedPublicValueStart']}}
+                            </div>
+                            <div>
+                                <mat-slider min="1" max="5" step="0.1">
+                                    <input matSliderStartThumb formControlName="ExpectedPublicValueStart"
+                                        (change)="onSliderFilterChange()">
+                                    <input matSliderEndThumb formControlName="ExpectedPublicValueEnd"
+                                        (change)="onSliderFilterChange()">
+                                </mat-slider>
+                            </div>
+                            <div class="eui-u-ml-s eui-u-width-1">
+                                {{filterForm.value['ExpectedPublicValueEnd']}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 eui-u-inline-flex">
+                            <div>
+                                Support Ability
+                            </div>
+                        </div>
+                        <div class="col-3 eui-u-inline-flex">
+                            <div class="eui-u-ml-l eui-u-width-1">
+                                {{filterForm.value['SupportAbilityStart']}}
+                            </div>
+                            <div>
+                                <mat-slider min="1" max="5" step="0.1">
+                                    <input matSliderStartThumb formControlName="SupportAbilityStart"
+                                        (change)="onSliderFilterChange()">
+                                    <input matSliderEndThumb formControlName="SupportAbilityEnd"
+                                        (change)="onSliderFilterChange()">
+                                </mat-slider>
+                            </div>
+                            <div class="eui-u-ml-s eui-u-width-1">
+                                {{filterForm.value['SupportAbilityEnd']}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 eui-u-inline-flex">
+                            <div>
+                                Estimated Budget (mill €)
+                            </div>
+                        </div>
+                        <div class="col-3 eui-u-inline-flex">
+                            <div class="eui-u-ml-l eui-u-width-1">
+                                {{filterForm.value['EstimatedBudgetStart']}}
+                            </div>
+                            <div>
+                                <mat-slider min="1" [max]="maxBudget" step="0.1">
+                                    <input matSliderStartThumb formControlName="EstimatedBudgetStart"
+                                        (change)="onSliderFilterChange()">
+                                    <input matSliderEndThumb formControlName="EstimatedBudgetEnd"
+                                        (change)="onSliderFilterChange()">
+                                </mat-slider>
+                            </div>
+                            <div class="eui-u-ml-s eui-u-width-1">
+                                {{filterForm.value['EstimatedBudgetEnd']}}
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </ng-container>
+        </div>
+    </eui-card-content>
+</eui-card>

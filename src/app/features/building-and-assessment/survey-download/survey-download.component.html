@@ -1,0 +1,25 @@
+<eui-page-header
+    label="Finalization of assessment survey">
+</eui-page-header>
+<eui-page-content>
+    <eui-card>
+        <eui-card-header>
+            <eui-card-header-title>
+                Survey download
+            </eui-card-header-title>
+        </eui-card-header>
+        <eui-card-content>
+            <p>
+                You have finalized the assessment survey. A JSON download will begin soon. You can also press the following button to download the document again:
+            </p>
+            <div>
+                <button
+                    euiButton
+                    euiPrimary
+                    (click)="downloadAssessmentJson()">
+                    Download survey
+                </button>
+            </div>
+        </eui-card-content>
+    </eui-card>   
+</eui-page-content>

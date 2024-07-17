@@ -1,0 +1,289 @@
+<eui-page-header
+    label="Assessment of requirements">
+</eui-page-header>
+<eui-page-content>
+    <div class="eui-u-flex eui-u-flex-row eui-u-mb-s">
+        <div class="eui-u-flex eui-u-flex-justify-content-start">
+            <button
+                euiButton 
+                euiPrimary
+                class="eui-u-mr-s"
+                (click)="onSaveSurveyClick()">
+                Save survey
+            </button>
+            <button
+                euiButton
+                euiSecondary>
+                Show instructions
+            </button>
+        </div>
+        <div class="eui-u-flex eui-u-flex-justify-content-end">
+            <button
+                euiButton
+                euiPrimary
+                (click)="returnToCapabilityAssessment()">
+                Return to Capability Assessment
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <eui-card euiNoContentPadding>
+                <eui-card-header>
+                    <eui-card-header-title>
+                        List of selected DBCs
+                    </eui-card-header-title>
+                </eui-card-header>
+                <eui-card-content>
+                    <div *ngFor="let domain of selectedDomains">
+                        <eui-card *ngIf="domainsHasSelectedDbcs(domain.id)">
+                            <eui-card-header>
+                                <eui-card-header-title>
+                                    {{ domain.value }}
+                                </eui-card-header-title>
+                            </eui-card-header>
+                            <eui-card-content>
+                                <ul euiList>
+                                    <li
+                                        euiListItem
+                                        *ngFor="let dbc of selectedDBCs[domain.id]"
+                                        [isActive]="isItemActive(dbc)"
+                                        (click)="onNextDbcClick(dbc)">
+                                        <span euiLabel>
+                                            {{ dbc.Name }}
+                                        </span>
+                                    </li>
+                                </ul>
+                            </eui-card-content>
+                        </eui-card>
+                    </div>
+                </eui-card-content>
+            </eui-card>
+        </div>
+        <div class="col-9">
+            <div class="row">
+                <div class="col">
+                    <div class="eui-u-font-bold eui-u-font-3xl eui-u-mb-xs">
+                        <a target="_blank" href="{{ currentDBC.Puri }}">{{currentDBC.Name}}</a>
+                    </div>
+                    <div class="eui-u-font-l eui-u-mb-l">
+                        {{ currentDBC.Description }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div *ngFor="let view of viewList">
+                        <eui-card
+                            class="eui-u-mb-s"
+                            [euiCollapsible]="isViewCardCollapsible(view.id)"
+                            [euiCollapsed]="isViewCardCollapsed(view.id)"
+                            (click)="onViewClick(view.id)">
+                            <eui-card-header>
+                                <eui-card-header-title>
+                                    {{ view.value }} View
+                                </eui-card-header-title>
+                            </eui-card-header>
+                            <eui-card-content>
+                                <div *ngFor="let abb of ABBsByViews[view.id]">
+                                    <eui-card
+                                        class="eui-u-mb-s"
+                                        [euiCollapsible]="isAbbCardCollapsible(abb)"
+                                        [euiCollapsed]="isAbbCardCollapsed(abb)"
+                                        (click)="onABBClick(abb)">
+                                        <eui-card-header [isHeaderMultilines]="true">
+                                            <eui-card-header-title>
+                                                <!-- Requirement: {{ abb.Name }} -->
+                                                Requirement: <a target="_blank" href="{{ abb.Puri }}">{{abb.Name}}</a>
+                                            </eui-card-header-title>
+                                            <eui-card-header-subtitle>
+                                                {{ abb.Description }}
+                                            </eui-card-header-subtitle>
+                                        </eui-card-header>
+                                        <eui-card-content>
+                                            <form [formGroup]="supportAbilityForm" *ngIf="!isAbbCardCollapsed(abb)">
+                                                <ng-container *ngFor="let dps of ABBRelatedDPSList; let i=index; let last=last">
+                                                    <div class="row eui-u-mt-m eui-u-mb-m eui-u-ml-s">
+                                                        <div class="col eui-u-font-bold">
+                                                            To what extent the AS-ls <span>{{ dps.Name }}</span> below meet the requirement?
+                                                        </div>
+                                                    </div>
+                                                    <div class="row eui-u-mb-s eui-u-ml-l">
+                                                        <div class="col">
+                                                            <!-- {{ dps.Name }} -->
+                                                            <a target="_blank" href="{{ dps.Puri }}">{{dps.Name}}</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row eui-u-mb-m eui-u-ml-xl">
+                                                        <div class="col">
+                                                            {{ dps.Description }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row eui-u-mb-m eui-u-ml-xl">
+                                                        <div class="col">
+                                                            <mat-radio-group formControlName="{{currentDBC.Puri}}-{{dps.Puri}}-supportAbility" (change)="onSupportAbilityClick(dps)">
+                                                                <ng-container *ngFor="let rating of supportAbilityOptions">
+                                                                    <mat-radio-button [value]="rating.id">
+                                                                        {{ rating.value }}
+                                                                    </mat-radio-button>
+                                                                </ng-container>
+                                                            </mat-radio-group>
+                                                        </div>
+                                                    </div>
+                                                    <hr *ngIf="!last"/>
+                                                </ng-container>
+                                            </form>
+                                        </eui-card-content>
+                                    </eui-card>
+                                </div>
+                                <form [formGroup]="supportAbilityForm">
+                                    <div *ngFor="let domain of selectedDomains">
+                                        <ng-container *ngFor="let dbc of selectedDBCs[domain.id]">
+                                            <ng-container  *ngIf="dbc.Puri === currentDBC.Puri">
+                                                <div class="row eui-u-mb-s eui-u-mt-l">
+                                                    <div class="col">
+                                                        The overall assessed <span class="eui-u-font-bold eui-u-cursor-help" euiTooltip="It reports the ability to support the Digital Business Capability/ies">Ability to Support</span> the <span class="eui-u-font-bold">{{ dbc.Name }}</span> {{ view.value }} requirements is: <span class="eui-u-font-bold">{{ calculateSupportAbility(dbc) }}</span> out of 5
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        Please, indicate the <span class="eui-u-font-bold eui-u-cursor-help" euiTooltip="It reports the target prospective ability to support the Digital Business Capability/ies">Target Prospective Ability to Support</span> the <span class="eui-u-font-bold" euiTooltip="A particular digital ability or capacity that an organisation may possess or exchange to achieve a specific purpose or outcome.">Digital Business Capability</span> - {{ view.value }} requirements (1-5):
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <mat-slider 
+                                                            min="1" 
+                                                            max="5" 
+                                                            step="1">
+                                                            <input matSliderThumb formControlName="{{dbc.Puri}}-{{view.id}}-targetSupportAbility" (change)="onTargetSupportAbilityClick(view.id)">
+                                                        </mat-slider>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <span class="eui-u-font-bold">{{ calculateTargetSupportAbility(dbc, view.id) }}</span> out of 5
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        Therefore, the gap between the <span class="eui-u-font-bold">Target Prospective Average Ability</span> and the <span class="eui-u-font-bold">Overall Assessed Ability to Support</span> the <span class="eui-u-font-bold" euiTooltip="A particular digital ability or capacity that an organisation may possess or exchange to achieve a specific purpose or outcome.">Digital Business Capability</span> {{view.value}} requirements is: {{ calculateGap(dbc, view.id) }}
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                        </ng-container>
+                                    </div>
+                                </form>
+                            </eui-card-content>
+                        </eui-card>
+                    </div>
+                    <eui-card class="eui-u-mb-s">
+                        <eui-card-header>
+                            <eui-card-header-title>
+                                Overall assessed values for {{ currentDBC.Name }}
+                            </eui-card-header-title>
+                        </eui-card-header>
+                        <eui-card-content>
+                            <div class="row">
+                                <div class="col">
+                                    The overall assessed <span class="eui-u-font-bold eui-u-cursor-help" euiTooltip="It reports the ability to support the Digital Business Capability/ies">Ability to Support</span> the DBC is: <span class="eui-u-font-bold">{{ calculateOverallSupportAbility() }}</span> out of 5
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    The overall <span class="eui-u-font-bold eui-u-cursor-help" euiTooltip="It reports the target prospective ability to support the Digital Business Capability/ies">Target Prospective Average Ability</span> for the DBC is: <span class="eui-u-font-bold">{{ calculateOverallTargetSupportAbility() }}</span> out of 5
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    Therefore, the gap between the <span class="eui-u-font-bold">Target Prospective Average Ability</span> and the <span class="eui-u-font-bold">Overall Assessed Ability to Support</span> the DBC is: <span class="eui-u-font-bold">{{ calculateOverallGap() }}</span>
+                                </div>
+                            </div>
+                        </eui-card-content>
+                    </eui-card>
+
+                    <div *ngFor="let domain of selectedDomains">
+                        <ng-container *ngFor="let dbc of selectedDBCs[domain.id]">
+                            <eui-card
+                            *ngIf="dbc.Puri === currentDBC.Puri"
+                            #testingCard
+                            class="eui-u-mb-s"
+                            euiCollapsible
+                            euiCollapsed>
+                                <eui-card-header>
+                                    <eui-card-header-title>
+                                        Expected Public Value & Estimated Budget
+                                    </eui-card-header-title>
+                                </eui-card-header>
+                                <eui-card-content>
+                                    <form [formGroup]="supportAbilityForm">
+                                        <div class="row eui-u-mb-s">
+                                            <div class="col">
+                                                <label euiLabel>
+                                                    Please, indicate the <span class="eui-u-font-bold  eui-u-cursor-help" euiTooltip="It reports the expected beneficial impact (cost discounted) provided by the target prospective ability to support">Expected Public Value</span> to this Digital Business Capability:
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row eui-u-mb-m">
+                                            <div class="col">
+                                                <mat-radio-group formControlName="{{dbc.Puri}}-expectedPublicValue">
+                                                    <ng-container *ngFor="let rating of expectedPublicValueOptions">
+                                                        <mat-radio-button [value]="rating">
+                                                            {{ rating }}
+                                                        </mat-radio-button>
+                                                    </ng-container>
+                                                </mat-radio-group>
+                                            </div>
+                                        </div>
+                                        <div class="row eui-u-mb-s">
+                                            <div class="col">
+                                                <div class="eui-u-flex eui-u-flex-justify-content-start eu-u-mt-s">
+                                                    <label euiLabel>
+                                                        Now indicate the <span class="eui-u-font-bold eui-u-cursor-help" euiTooltip="It reports the amount of Euros (Million of Euros) to be allocated for the Digital Business Capabilities implementation">Estimated Budget</span> in mill € for this Digital Business Capability:
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div euiInputGroup class="col">
+                                                <input 
+                                                euiInputNumber
+                                                [fractionDigits]="3"
+                                                min="0"
+                                                placeholder="Estimated Budget"
+                                                formControlName="{{dbc.Puri}}-estimatedBudget"
+                                                />
+                                            </div>
+                                        </div>
+                                    </form>
+                                </eui-card-content>
+                            </eui-card>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="eui-u-flex eui-u-flex-row eui-u-flex-justify-content-center">
+        <button 
+            euiButton 
+            euiPrimary
+            class="eui-u-mr-s"
+            [disabled]="isFirstDBC()"
+            (click)="changeDBC('prev')">
+            Previous DBC
+        </button>
+        <button 
+            euiButton 
+            euiPrimary
+            *ngIf="!isLastDBC()"
+            (click)="changeDBC('next')">
+            Next DBC
+        </button>
+        <button 
+            euiButton 
+            euiSuccess
+            *ngIf="isLastDBC()"
+            (click)="finalizeAssessment()">
+            Complete Assessment
+        </button>
+    </div>
+</eui-page-content>

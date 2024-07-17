@@ -1,0 +1,57 @@
+<eui-page>
+    <eui-page-header label="Digital Business Capability Portfolio Management Decision Support">
+        <eui-page-header-action-items>
+            <input 
+                #surveyInput
+                hidden="true"
+                onClick="this.value=null"
+                (change)="uploadSurvey($event)"
+                type="file"/>
+            <button 
+                euiButton 
+                euiPrimary
+                (click)="surveyInput.click()">
+                Load survey
+            </button>
+            <button
+                euiButton
+                euiSecondary
+                [euiDisabled]="loadedSurvey.length === 0"
+                (click)="onExportClick()">
+                Export as PDF
+            </button>
+        </eui-page-header-action-items>
+    </eui-page-header>
+    <eui-page-content>
+        <eui-card *ngIf="loadedSurvey.length === 0">
+            <eui-card-content>
+                Please upload an assessment survey to continue
+            </eui-card-content>
+        </eui-card>
+        <app-portfolio-management 
+            *ngIf="showPortfolioManagement"
+            class="eui-u-mb-l"
+            [survey]="loadedSurvey"
+            [contactInfo]="contactInfo"
+            [requestPDFData]="requestDataFromPortfolioManagement"
+            (selectedDBC)="onDBCSelection($event)"
+            (pdfData)="portfolioManagementPDFData($event)">
+        </app-portfolio-management>
+        <app-digital-transformation-roadmap
+            id="transformation-roadmap"
+            *ngIf="showRoadmap"
+            class="eui-u-mb-l"
+            [assessment]="selectedAssessment"
+            [DBC]="selectedDBC"
+            [downloadPDF]="downloadPDF"
+            (componentLoaded)="onRoadmapLoad($event)">
+        </app-digital-transformation-roadmap>
+        <!-- <app-export-pdf
+            *ngIf="showExport"
+            [survey]="loadedSurvey"
+            [downloadPDF]="downloadPDF"
+            [contactInfo]="contactInfo"
+            [portfolioManagementData]="portfolioManagementData">
+        </app-export-pdf> -->
+    </eui-page-content>
+</eui-page>

@@ -1,0 +1,187 @@
+<eui-page-content>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <eui-card>
+                    <eui-card-header>
+                        <eui-card-header-title>
+                            Initialization form
+                        </eui-card-header-title>
+                    </eui-card-header>
+                    <eui-card-content>
+                        <form [formGroup]="contactInformationForm">
+                            <div 
+                                euiInputGroup 
+                                class="row">
+                                <div class="col eui-u-flex eui-u-flex-justify-content-start eu-u-mt-s">
+                                    <label euiLabel>
+                                        Please provide the contact information:
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <div euiInputGroup>
+                                        <label euiLabel>
+                                            Full name
+                                        </label>
+                                        <input 
+                                            euiInputText 
+                                            placeholder="First/last name"
+                                            formControlName="fullName"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div euiInputGroup>
+                                        <label euiLabel>
+                                            Organisation
+                                        </label>
+                                        <input 
+                                            euiInputText 
+                                            placeholder="Organisation"
+                                            formControlName="organisation"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div euiInputGroup>
+                                        <label euiLabel>
+                                            Organisation email
+                                        </label>
+                                        <input 
+                                            euiInputText 
+                                            placeholder="Email"
+                                            formControlName="organisationEmail"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div euiInputGroup>
+                                        <label euiLabel>
+                                            Country
+                                        </label>
+                                        <input 
+                                            euiInputText 
+                                            placeholder="Country"
+                                            formControlName="country"
+                                        />
+                                    </div>
+                                </div>
+                                <!-- <eui-feedback-message
+                                    euiWarning
+                                    *ngIf="!isFormValid()"
+                                    class="eui-u-mb-l">
+                                    To continue with the assessment fill the contact information form or load a previous survey
+                                </eui-feedback-message> -->
+                            </div>
+                        </form>
+                        <form [formGroup]="businessDomainForm">
+                            <div euiInputGroup class="row">
+                                <div class="col-9">
+                                    <div class="eui-u-flex eui-u-flex-justify-content-start eu-u-mt-s">
+                                        <label euiLabel>Choose the eGovERA domains to be included in the assessment:</label>
+                                    </div>
+                                    <div class="eui-u-flex eui-u-flex-wrap">
+                                        <div class="eui-u-inline-flex eui-u-mt-s">
+                                            <input 
+                                                euiInputCheckBox 
+                                                id="businessAgnostic" 
+                                                name="businessAgnostic"
+                                                value="businessAgnostic"
+                                                readonly
+                                                checked="true"
+                                                formControlName="businessAgnostic"
+                                            />
+                                            <label
+                                                euiLabel
+                                                for="businessAgnostic">
+                                                Business Agnostic
+                                            </label>
+                                        </div>
+                                        <div class="eui-u-inline-flex eui-u-mt-s">
+                                            <input 
+                                                euiInputCheckBox 
+                                                id="customs" 
+                                                name="customs"
+                                                value="customs"
+                                                formControlName="customs"
+                                            />
+                                            <label
+                                                euiLabel
+                                                for="customs">
+                                                Customs
+                                            </label>
+                                        </div>
+                                        <div class="eui-u-inline-flex eui-u-mt-s">
+                                            <input 
+                                                euiInputCheckBox 
+                                                id="health" 
+                                                name="health"
+                                                value="health"
+                                                formControlName="health"
+                                            />
+                                            <label
+                                                euiLabel
+                                                for="health">
+                                                Health
+                                            </label>
+                                        </div>
+                                        <div class="eui-u-inline-flex eui-u-mt-s">
+                                            <input 
+                                                euiInputCheckBox 
+                                                id="taxes" 
+                                                name="taxes"
+                                                value="taxes"
+                                                formControlName="taxes"
+                                            />
+                                            <label
+                                                euiLabel
+                                                euiTooltip="test"
+                                                for="taxes">
+                                                Taxes
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </eui-card-content>
+                    <eui-card-footer>
+                        <eui-card-footer-action-buttons>
+                            <ng-container *ngIf="!isFormValid(); else elseBlock">
+                                <button 
+                                    euiButton 
+                                    euiDanger
+                                    euiTooltip="To start with the assessment &#13; fill the contact information form or load a previous survey"
+                                    class="eui-u-cursor-not-allowed">
+                                    Start the assessment
+                                </button>
+                            </ng-container>
+                            <ng-template #elseBlock>
+                                <button 
+                                    euiButton 
+                                    euiPrimary
+                                    (click)="onStartAssessmentClick()">
+                                    Start the assessment
+                                </button>
+                            </ng-template>
+                            <input 
+                                #surveyInput
+                                hidden="true"
+                                onClick="this.value=null"
+                                (change)="surveyUpload($event)"
+                                type="file"/>
+                            <button 
+                                euiButton 
+                                euiSecondary
+                                (click)="surveyInput.click()">
+                                Load previous work
+                            </button>
+                        </eui-card-footer-action-buttons>
+                    </eui-card-footer>
+                </eui-card>
+            </div>
+        </div>
+    </div>
+</eui-page-content>

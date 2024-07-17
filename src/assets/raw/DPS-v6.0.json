@@ -1,0 +1,246 @@
+[
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/EIdentificationBusinessService",
+        "Policy": "Business Agnostic",
+        "Name": "eIdentification",
+        "Description": "Digital Public Service enabling the identification of citizens or organizations. It can be used to access public services provided by public administrations.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/ElectronicIdentificationCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/AnonymisationBusinessService",
+        "Policy": "Business Agnostic",
+        "Name": "Anonymisation",
+        "Description": "Digital Public Service enabling data owners to sanitise datasets to make them considered as anonymous information, namely information which does not relate to an identified or identifiable natural person or to personal data rendered anonymous in such a manner that the data subject is not or no longer identifiable.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/ElectronicIdentificationCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/AuditBusinessService",
+        "Policy": "Business Agnostic",
+        "Name": "Audit ",
+        "Description": "Digital Public Service enabling inspection and evaluation of the quality of the information processed by information systems, and to determine the conformance to policies, contract commitments, and regulatory requirements.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/ElectronicIdentificationCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/SecureAccessControlBusinessService",
+        "Policy": "Business Agnostic",
+        "Name": "Secure Access Control",
+        "Description": "Digital Public Service enabling the definition of user permissions for allowed operations (e.g. view and/or update) on specific resources (e.g. web pages, documents, etc), and the tracking of user operations.(aka: Permission management)",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/ElectronicIdentificationCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/DelegationOfPowerBusinessService",
+        "Policy": "Business Agnostic",
+        "Name": "Delegation of Power",
+        "Description": "Digital Public Service enabling the delegation management via digital means, to delegate responsibilities from an individual invested with certain powers to another one, and to track the related delegation acts.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/ElectronicIdentificationCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/BusinessIntelligengeBusinessService",
+        "Policy": "Business Agnostic",
+        "Name": "Business Intelligence",
+        "Description": "Digital Public Service enabling the provision of actionable insights and a holistic view of the business, enabling organizations to make data-driven decisions, identify trends, uncover opportunities, and optimize performance. It involves the use of analytics tools, data visualization, reporting, and data mining techniques to extract valuable information from raw data.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/ArtificialIntelligenceCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/DataExtractionTransformationAndLoadingBusinessService",
+        "Policy": "Business Agnostic",
+        "Name": "Data Extraction, Transformation and Loading ",
+        "Description": "Digital Public Service enabling organisations to gather data from multiple sources, transform them and load them into a single, centralised location. ",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/DataManagementCapability",
+            "http://data.europa.eu/dr8/egovera/DigitalTwinCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/EDeliveryBusinessService",
+        "Policy": "Business Agnostic",
+        "Name": "eDelivery",
+        "Description": "Digital Public Service enabling the creation of a network of nodes for secure digital data exchange through safe and interoperable channels.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/DigitalExchangeCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/DigitalCollaborationBusinessService",
+        "Policy": "Business Agnostic",
+        "Name": "Digital collaboration",
+        "Description": "Digital Public Service enabling internal staff and external stakeholders of public administrations to interact and work together through a digital platform at any point in time.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/DigitalCommunicationCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/DigitalAssetManagementBusinessService",
+        "Policy": "Business Agnostic",
+        "Name": "Digital Asset Management",
+        "Description": "Digital Public Service enabling the collection of digital assets to ensure that the owner, and possibly their delegates, can perform operations on the data file",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/MultimediaManagementCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/ContactManagementBusinessService",
+        "Policy": "Business Agnostic",
+        "Name": "Contact Management",
+        "Description": "Digital Public Service enabling the storage and the organisation of contacts of a public administration's user base (both providers and consumers of its public services), and the tracking of the related interactions.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/ContactManagementCapability"
+        ]
+    },
+    {
+        "Policy": "Business Agnostic",
+        "Name": "Knowledge Management ",
+        "ID": "http://data.europa.eu/dr8/egovera/KnowledgeManagementBusinessService",
+        "Description": "Digital Public Service enabling the identification, collection, storage, manipulation and publication / sharing of valuable information (in any form or representation) to promote and enable the value-creation through knowledge.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/KnowledgeManagementCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/KnowledgeManagementBusinessService",
+        "Policy": "Business Agnostic",
+        "Name": "eTranslation ",
+        "Description": "Digital Public Service enabling users to translate text excerpts or complete documents in different languages ",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/KnowledgeManagementCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/EArchivingBusinessService",
+        "Policy": "Business Agnostic",
+        "Name": "eArchiving",
+        "Description": "Digital Public Service enabling the collection and catalogation of data for the preservation and reuse of information over the long-term.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/KnowledgeManagementCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/ContentManagementBusinessService",
+        "Policy": "Business Agnostic",
+        "Name": "Content Management",
+        "Description": "Digital Public Service enabling the secure and efficient management of multimedia objects (e.g. images, audio, video streams) from their creation and distribution inside and/or outside a public organisation.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/DataManagementCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/OpenDataManagementBusinessService",
+        "Policy": "Business Agnostic",
+        "Name": "Open Data Management",
+        "Description": "Digital Public Service enabling public administrations' data to be exposed and made available in an \"open\" format and that can be freely used, re-used and shared by anyone for any purpose.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/DataManagementCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/DataAnalyticsBusinessService",
+        "Policy": "Business Agnostic",
+        "Name": "Data Analytics ",
+        "Description": "Digital Public Service enabling the management and analysis of data, to drive business processes and improve business outcomes through more effective decision making and enhanced customer experiences.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/DataManagementCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/WorkflowManagementBusinessService",
+        "Policy": "Business Agnostic",
+        "Name": "Workflow Management",
+        "Description": "Digital Public Service enabling the configuration and automation of business processes composed of both manual and automatic tasks.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/CaseAndWorkflowManagementCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/FormsManagementBusinessService",
+        "Policy": "Business Agnostic",
+        "Name": "Forms Management",
+        "Description": "Digital Public Service enabling the storage, catalogation and indexing/searching of structured and unstructured documents.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/CaseAndWorkflowManagementCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/WaitingListManagementBusinessService",
+        "Policy": "Business Agnostic",
+        "Name": "Waiting list Management",
+        "Description": "Digital Public Service enabling the management and optimisation of a waiting list / queue of users that are willing to access to a specific public service. This service enables an effective management of available resources and an effective delivery of public services to their users.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/CaseAndWorkflowManagementCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/ENotificationBusinessService",
+        "Policy": "Business Agnostic",
+        "Name": "eNotification",
+        "Description": "Digital Public Service enabling the management of business rules to trigger messages addressed to targeted users depending on specific events / conditions.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/CaseAndWorkflowManagementCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/EQualificationBusinessService",
+        "Policy": "Business Agnostic",
+        "Name": "eQualification",
+        "Description": "Digital Public Service enabling citizens, public institutions and private organisations to verify the authenticity of professionals' qualifications on education and employment career.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/QualificationManagementCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/EPaymentBusinessService",
+        "Policy": "Business Agnostic",
+        "Name": "ePayment ",
+        "Description": "Digital Public Service enabling individuals and organisations to purchase goods or services via digital or online modes, without the involvement of physical money exchange. It provides the possibility to perform financial operations using digital payment methods such as, among others, Banking Cards and Point of Sale (PoS) terminals.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/DigitalPaymentsCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/LogManagementBusinessService",
+        "Policy": "Business Agnostic",
+        "Name": "Log Management",
+        "Description": "Digital Public Service enabling the logging and management of online transactions (e.g. online daily payment transactions) registered by information systems owned by public organisations.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/DigitalPaymentsCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/EInvoicingBusinessService",
+        "Policy": "Business Agnostic",
+        "Name": "eInvoicing",
+        "Description": "Digital Public Service enabling public organisations to issue, transmit and deliver electronic invoice documents in a structured data format to its providers/suppliers, according to European standards\r\n\r\nDigital Invoicing enables the issuing, transmission and delivery of electronic invoice documents in a structured data format between a public administration and its providers/suppliers. Digital Invoicing ensures data security and privacy, and automatic and electronic processing of invoices.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/DigitalInvoicingCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/ETenderingBusinessService",
+        "Policy": "Business Agnostic",
+        "Name": "eTendering",
+        "Description": "Digital Public Service enabling the electronic end-to-end management of the purchasing process and related tasks associated to the acquisition of third-party goods and/or services through digital means and information and communication technologies.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/DigitalProcurementCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/ESignatureBusinessService",
+        "Policy": "Business Agnostic",
+        "Name": "eSignature",
+        "Description": "Digital Public Service enabling public administrations and businesses accelerate the creation and verification of electronic signatures that are legally valid in all European Member States.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/DigitalProcurementCapability"
+        ]
+    }
+]

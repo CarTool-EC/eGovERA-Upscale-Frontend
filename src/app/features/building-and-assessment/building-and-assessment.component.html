@@ -1,0 +1,38 @@
+<eui-page>
+    <eui-page-header 
+        label="Digital Business Capability Building and Assessment">
+    </eui-page-header>
+    <eui-page-content>
+        <app-initialization-form 
+            *ngIf="showInitializationForm" 
+            (startAssessment)="onStartAssessmentClick($event)"
+            (loadedSurvey)="onLoadedSurvey($event)">
+        </app-initialization-form>
+
+        <app-capability-assessment
+            *ngIf="showCapabilityAssessment"
+            [selectedDomains]="selectedDomainList"
+            [previouslySelectedDBCs]="selectedDBCs"
+            [assessments]="assessments"
+            (capabilityAssessment)="onCapabilityAssessmentFinish($event)"
+            (pauseAssessment)="onPauseAssessmentClick($event)"
+            (returnToStart)="onReturnToStartFormClick($event)">
+        </app-capability-assessment>
+
+        <app-requirements-assessment
+            *ngIf="showRequirementsAssessment"
+            [selectedDomains]="selectedDomainList"
+            [selectedDBCs]="selectedDBCs"
+            [assessments]="assessments"
+            (finalizedAssessments)="finalizeAssessment($event)"
+            (pauseAssesment)="onPauseAssessmentClick($event)"
+            (return)="onReturnClick($event)">
+        </app-requirements-assessment>
+        
+        <app-survey-download
+            *ngIf="showSurveyDownload"
+            [assessments]="assessments"
+            [contactInfo]="contactInfo">
+        </app-survey-download>
+    </eui-page-content>
+</eui-page>

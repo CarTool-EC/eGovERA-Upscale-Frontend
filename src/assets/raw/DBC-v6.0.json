@@ -1,0 +1,144 @@
+[
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/ElectronicIdentificationCapability",
+        "Policy": "Business Agnostic",
+        "Name": "Electronic Identification",
+        "Description": "Electronic Identification enables the proof of citizens or organizations (i.e. public administrations and businesses) identity via digital modes, with the goal to access to a wide variety of services (e.g. government authorities services, digital payments services, ...).",
+        "Digital_Public_Services": [
+            {"Name": "eIdentification", "ID": "http://data.europa.eu/dr8/egovera/EIdentificationBusinessService"},
+            {"Name": "Anonymisation", "ID": "http://data.europa.eu/dr8/egovera/AnonymisationBusinessService"},
+            {"Name": "Audit", "ID": "http://data.europa.eu/dr8/egovera/AuditBusinessService"},
+            {"Name": "Secure Access Control", "ID": "http://data.europa.eu/dr8/egovera/SecureAccessControlBusinessService"},
+            {"Name": "Delegation of Power", "ID": "http://data.europa.eu/dr8/egovera/DelegationOfPowerBusinessService"}
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/ArtificialIntelligenceCapability",
+        "Policy": "Business Agnostic",
+        "Name": "Artificial Intelligence ",
+        "Description": "Artificial Intelligence includes different topics: \r\n- Big Data Analysis enables organisations to analyse high-volume, high-velocity and/or high-variety information and data enabling enhanced insight, a more effective decision making, and process automation. \r\n- Data mining enables organisations to discover meaningful correlations and connections, patterns and trends by considering large amounts of data stored in databases and repositories. Data mining, as a fundamental pillar for Artificial Intelligence, employs pattern recognition technologies, as well as statistical and mathematical techniques.\r\n- Natural language processing (NLP) enables organisations to build machines that understand and respond to text or voice data—and respond with text or speech of their own—in much the same way humans do. By means of the parsing and semantic interpretation of text or voice data, it allows machines to learn, analyse, and understand human language.\r\n- Machine learning enables organisations to build applications learning from data and improving their accuracy over time without being programmed to do so.",
+        "Digital_Public_Services": [
+            {"Name": "Business Intelligence","ID": "http://data.europa.eu/dr8/egovera/BusinessIntelligengeBusinessService"}
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/DigitalTwinCapability",
+        "Policy": "Business Agnostic",
+        "Name": "Digital Twin",
+        "Description": "Digital Twin enables the creation of a digital copy of reality, that allows to simulate and find answers in a risk free and secure environment. The coupling of the physical and digital world enables to monitor both systems, prevent issues, develop new opportunities and simulate future outcomes. It is based on three main pillars: Connectivity, Digitalization, Intelligence.",
+        "Digital_Public_Services": [
+            {"Name": "Data Extraction, Transformation and Loading ", "ID": "http://data.europa.eu/dr8/egovera/DataExtractionTransformationAndLoadingBusinessService"}
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/DigitalExchangeCapability",
+        "Policy": "Business Agnostic",
+        "Name": "Digital Exchange",
+        "Description": "Digital exchange enables the transmission of digitally encoded information to profiled targets of stakeholders.",
+        "Digital_Public_Services": [
+            {"Name": "eDelivery",
+            "ID": "http://data.europa.eu/dr8/egovera/EDeliveryBusinessService"}
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/DigitalCommunicationCapability",
+        "Policy": "Business Agnostic",
+        "Name": "Digital Communication ",
+        "Description": "Digital communication enables the virtual collaboration of a group of people engaged in common tasks, using information and communication technologies.",
+        "Digital_Public_Services": [
+            {"Name": "Digital collaboration", "ID": "http://data.europa.eu/dr8/egovera/DigitalCollaborationBusinessService"}
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/MultimediaManagementCapability",
+        "Policy": "Business Agnostic",
+        "Name": "Multimedia Management",
+        "Description": "Multimedia management enables the supervision, creation, distribution and publishing of multimedia content (text, audio and video) through digital means across and outside an organisation. This capability includes document management activities and processes.",
+        "Digital_Public_Services": [
+            {"Name": "Digital Asset Management", "ID": "http://data.europa.eu/dr8/egovera/DigitalAssetManagementBusinessService"}
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/ContactManagementCapability",
+        "Policy": "Business Agnostic",
+        "Name": "Contact Management",
+        "Description": "Contact management enables the storing and organisation of contacts of a public administration's user base (both providers and consumers of its public services) and tracking of the related interactions.",
+        "Digital_Public_Services": [
+            {"Name": "Contact Management", "ID": "http://data.europa.eu/dr8/egovera/ContactManagementBusinessService"}
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/KnowledgeManagementCapability",
+        "Policy": "Business Agnostic",
+        "Name": "Knowledge Management",
+        "Description": "Knowledge management enables organisation to create and use of knowledge. It is a discipline focused on the development of management systems that effectively promotes and enables value-creation through knowledge.",
+        "Digital_Public_Services": [
+            {"Name": "Knowledge Management ", "ID": "http://data.europa.eu/dr8/egovera/KnowledgeManagementBusinessService"},
+            {"Name": "eTranslation ", "ID": "http://data.europa.eu/dr8/egovera/KnowledgeManagementBusinessService"},
+            {"Name": "eArchiving", "ID": "http://data.europa.eu/dr8/egovera/EArchivingBusinessService"}
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/DataManagementCapability",
+        "Policy": "Business Agnostic",
+        "Name": "Data management ",
+        "Description": "Data management enables organisation to manage the flow of data throughout its entire lifecycle, that is articulated in: data creation, storage, usage, archival and destruction.",
+        "Digital_Public_Services": [
+            {"Name": "Content Management", "ID": "http://data.europa.eu/dr8/egovera/ContentManagementBusinessService"},
+            {"Name": "Open Data Management", "ID": "http://data.europa.eu/dr8/egovera/OpenDataManagementBusinessService"},
+            {"Name": "Data Analytics ", "ID": "http://data.europa.eu/dr8/egovera/DataAnalyticsBusinessService"},
+            {"Name": "Data Extraction, Transformation and Loading ", "ID": "http://data.europa.eu/dr8/egovera/DataExtractionTransformationAndLoadingBusinessService"}
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/CaseAndWorkflowManagementCapability",
+        "Policy": "Business Agnostic",
+        "Name": "Case and Workflow management ",
+        "Description": "Case and workflow management enables organisations to design, execute, and automatise internal processes based on pre-defined business rules.",
+        "Digital_Public_Services": [
+            {"Name": "Workflow Management", "ID": "http://data.europa.eu/dr8/egovera/WorkflowManagementBusinessService"},
+            {"Name": "Forms Management", "ID": "http://data.europa.eu/dr8/egovera/FormsManagementBusinessService"},
+            {"Name": "Waiting list Management", "ID": "http://data.europa.eu/dr8/egovera/WaitingListManagementBusinessService"},
+            {"Name": "eNotification", "ID": "http://data.europa.eu/dr8/egovera/ENotificationBusinessService"}
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/QualificationManagementCapability",
+        "Policy": "Business Agnostic",
+        "Name": "Qualification management",
+        "Description": "Qualification management enables the electronic validation and verification of the qualifications (any information linked to an individual with respect to the education and employment status) of the professionals against specific requirements defined by relevant legislations.",
+        "Digital_Public_Services": [
+            {"Name": "eQualification", "ID": "http://data.europa.eu/dr8/egovera/EQualificationBusinessService"}
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/DigitalPaymentsCapability",
+        "Policy": "Business Agnostic",
+        "Name": "Digital Payments",
+        "Description": "Digital Payments enables the purchase of goods or services via digital or online modes, without the involvement of physical money exchange. It provides the possibility to perform financial operations using digital payment methods such as, among others, Banking Cards and Point of Sale (PoS) terminals.",
+        "Digital_Public_Services": [
+            {"Name": "ePayment ", "ID": "http://data.europa.eu/dr8/egovera/EPaymentBusinessService"},
+            {"Name": "Log Management", "ID": "http://data.europa.eu/dr8/egovera/LogManagementBusinessService"}
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/DigitalInvoicingCapability",
+        "Policy": "Business Agnostic",
+        "Name": "Digital Invoicing ",
+        "Description": "Digital Invoicing enables the issuing, transmission and delivery of electronic invoice documents in a structured data format between a public administration and its providers/suppliers. Digital Invoicing ensures data security and privacy, and automatic and electronic processing of invoices.",
+        "Digital_Public_Services": [
+            {"Name": "eInvoicing", "ID": "http://data.europa.eu/dr8/egovera/EInvoicingBusinessService"}
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/DigitalProcurementCapability",
+        "Policy": "Business Agnostic",
+        "Name": "Digital Procurement",
+        "Description": "Digital procurement enables the electronic end-to-end management of the purchasing process and related tasks associated to the acquisition of third-party goods and/or services through digital means and information and communication technologies.",
+        "Digital_Public_Services": [
+            {"Name": "eTendering", "ID": "http://data.europa.eu/dr8/egovera/ETenderingBusinessService"},
+            {"Name": "eSignature", "ID": "http://data.europa.eu/dr8/egovera/ESignatureBusinessService"}
+        ]
+    }
+    
+]

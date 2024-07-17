@@ -1,0 +1,31 @@
+<eui-app isSidebarOpen="false">
+    <eui-app-toolbar hasLanguageSelector="false">
+        <eui-toolbar>
+            <eui-toolbar-logo></eui-toolbar-logo>
+            <eui-toolbar-app appName="eGovERA&copy; Upscale Solution"></eui-toolbar-app>
+            <eui-toolbar-environment>DEV</eui-toolbar-environment>
+        </eui-toolbar>
+    </eui-app-toolbar>
+    
+    <eui-app-sidebar #test>
+        <eui-app-sidebar-body>
+            <eui-app-sidebar-menu
+                [items]="sidebarItems"
+                [hasIcons]="true">
+            </eui-app-sidebar-menu>
+        </eui-app-sidebar-body>
+    </eui-app-sidebar>
+
+    <eui-app-footer>
+        <eui-footer class="eui-u-font-xs">
+            <div class="eui-u-flex eui-u-justify-content-start">
+                Copyright &copy; European Commission 2022
+            </div>
+            <div class="eui-u-flex eui-u-justify-content-end">
+                <a href="https://joinup.ec.europa.eu/sites/default/files/inline-files/ISA%20Product%20License%20v1%204.pdf" target="_blank">
+                    ISA Product License v1.4
+                </a>
+            </div>
+        </eui-footer>
+    </eui-app-footer>
+</eui-app>

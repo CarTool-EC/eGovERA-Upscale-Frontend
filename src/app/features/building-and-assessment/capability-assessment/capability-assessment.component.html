@@ -1,0 +1,245 @@
+<eui-page-header
+    label="Select the DBCs you want to include in the assessment">
+</eui-page-header>
+<eui-page-content>
+    <div class="eui-u-flex eui-u-flex-row eui-u-mb-s">
+        <div class="eui-u-flex eui-u-flex-justify-content-start">
+            <button
+                euiButton 
+                euiPrimary
+                class="eui-u-mr-s"
+                (click)="onSaveSurveyClick()">
+                Save survey
+            </button>
+            <button
+                euiButton
+                euiSecondary
+                (click)="onShowInstructionsClick()">
+                Show instructions
+            </button>
+        </div>
+        <div class="eui-u-flex eui-u-flex-justify-content-end">
+            <button
+                euiButton
+                euiPrimary
+                class="eui-u-mr-s"
+                (click)="onReturnToForm()">
+                Return to initialization form
+            </button>
+            <button
+                euiButton
+                euiDanger
+                (click)="onRemoveAllClick()">
+                Remove all selected DBC
+            </button>
+        </div>
+    </div>
+    <eui-tabs (tabSelect)="onTabSelect($event)">
+        <eui-tab *ngFor="let domain of selectedDomains">
+            <eui-tab-label>{{ domain.value }} <eui-chip euiSizeS>{{ getSelectedDbcNumber(domain) }}</eui-chip></eui-tab-label>
+            <eui-tab-content>
+                <div class="row">
+                    <div 
+                        class="col-2 eui-u-mb-m" 
+                        *ngFor="let dbc of currentDomainDBCs">
+                        <ng-container *ngIf="selectedDBCs[currentDomain].includes(dbc); else elseBlock">
+                            <eui-dashboard-card
+                                style="height: 10rem;"
+                                class="eui-u-border-state-success eui-u-bg-color-success-10"
+                                label="{{dbc.Name}}"
+                                [labelMaxLines]="5"
+                                (cardClick)="onDbcCardClick(dbc)">
+                            </eui-dashboard-card>
+                        </ng-container>
+                        <ng-template #elseBlock>
+                            <eui-dashboard-card
+                                style="height: 10rem;"
+                                class="eui-u-border-state-info"
+                                label="{{dbc.Name}}"
+                                [labelMaxLines]="5"
+                                (cardClick)="onDbcCardClick(dbc)">
+                            </eui-dashboard-card>
+                        </ng-template>
+                    </div>
+                </div>
+            </eui-tab-content>
+        </eui-tab>
+    </eui-tabs>
+    <div class="row">
+        <div class="col eui-u-flex eui-u-flex-justify-content-center">
+            <button 
+                euiButton 
+                euiPrimary
+                [disabled]="selectedDBCs[currentDomain].length == 0"
+                (click)="onNextStepClick()">
+                Next step
+            </button>
+        </div>
+    </div>
+</eui-page-content>
+
+<eui-dialog
+    #dbcDialog
+    [title]="'DBC Assessment'"
+    [hasAcceptButton]="false"
+    [hasDismissButton]="false"
+    [hasCloseButton]="false"
+    [isClosedOnEscape]="false"
+    [isClosedOnClickOutside]="false">
+    <ng-container *ngIf="selectedDBC != null">
+        <eui-dialog-header class="eui-u-font-bold">
+            <!-- {{ selectedDBC.Name }} -->
+            <a target="_blank" href="{{ selectedDBC.Puri }}">{{selectedDBC.Name}}</a>
+        </eui-dialog-header>
+        <p>{{ selectedDBC.Description }}</p>
+        <form [formGroup]="strategicFitForm">
+            <div class="row">
+                <div class="col eui-u-mb-s">
+                    <label euiLabel>
+                        Select the <span class="eui-u-font-bold eui-u-cursor-help" euiTooltip="It reports the strategic priority assigned to the digital business capability by the national digital agenda of the country">National Digital Strategic Fit</span> for this DBC:
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-radio-group formControlName="strategicFit">
+                        <ng-container *ngFor="let rating of ratingOptions">
+                            <mat-radio-button [value]="rating">
+                                {{ rating }}
+                            </mat-radio-button>
+                        </ng-container>
+                    </mat-radio-group>
+                </div>
+            </div>
+        </form>
+    </ng-container>
+    <eui-dialog-footer>
+        <div class="eui-u-flex eui-u-flex-justify-content-end eui-u-flex-wrap">
+            <button
+                euiButton
+                euiDanger
+                class="eui-u-mr-s"
+                (click)="onDialogCancel()">
+                {{ selectedDBCs[currentDomain].includes(selectedDBC) ? 'Remove' : 'Return' }}
+            </button>
+            <button
+                euiButton
+                euiSuccess
+                class="eui-u-mr-s"
+                [euiDisabled]="strategicFitForm.get('strategicFit').value == null"
+                (click)="onDialogConfirm()">
+                {{ selectedDBCs[currentDomain].includes(selectedDBC) ? 'Continue' : 'Include' }}
+            </button>
+        </div>    
+    </eui-dialog-footer>
+</eui-dialog>
+<eui-dialog
+    #instructionsDialog
+    [title]="'Digital Business Capability Assessment Overview'"
+    [hasAcceptButton]="false"
+    [hasDismissButton]="false"
+    [hasCloseButton]="true"
+    [isClosedOnEscape]="true"
+    [isClosedOnClickOutside]="true"
+    [hasFooter]="false"
+    [height]="'75vh'"
+    [width]="'75vw'">
+    <div class="eui-u-flex eui-u-inline-flex eui-u-flex-wrap">
+        <div class="row">
+            <div class="col">
+                Please indicate the <span class="eui-u-font-bold">National Digital Strategic Fit</span> for each <a target="_blank" class="eui-u-font-bold" href="https://joinup.ec.europa.eu/taxonomy/term/http_e_f_fdata_ceuropa_ceu_fdr8_fDigitalBusinessCapability">Digital Business Capability</a>, taking into account the following instructions:
+            </div>
+        </div>
+        <div class="row eui-u-mb-l eui-u-flex eui-u-flex-wrap">
+            <div class="col">
+                <ul euiList [euiHighlighted]="false">
+                    <li euiListItem>
+                        <div 
+                            euiLabel 
+                            class="eui-u-text-wrap">
+                            You are asked to prioritise all the <a target="_blank" class="eui-u-font-bold" href="https://joinup.ec.europa.eu/taxonomy/term/http_e_f_fdata_ceuropa_ceu_fdr8_fDigitalBusinessCapability">Digital Business Capabilities</a> for the selected policy domain, according to the <span class="eui-u-font-bold">National Digital Strategic Fit</span> that you as a Member state assign to the specific <a target="_blank" class="eui-u-font-bold" href="https://joinup.ec.europa.eu/taxonomy/term/http_e_f_fdata_ceuropa_ceu_fdr8_fDigitalBusinessCapability">Digital Business Capability</a>.
+                        </div>
+                    </li>
+                    <li euiListItem>
+                        <div 
+                            euiLabel 
+                            class="eui-u-text-wrap">
+                            You can choose to address only some <a target="_blank" class="eui-u-font-bold" href="https://joinup.ec.europa.eu/taxonomy/term/http_e_f_fdata_ceuropa_ceu_fdr8_fDigitalBusinessCapability">Digital Business Capabilities</a> and to exclude any of them in the evaluation process by not selecting a <span class="eui-u-font-bold">National Digital Strategic Fit</span>.
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col eui-u-font-bold">
+                Definitions:
+            </div>
+        </div>
+        <div class="row eui-u-mb-l eui-u-flex eui-u-flex-wrap">
+            <div class="col">
+                <ul euiList>
+                    <li euiListItem>
+                        <div 
+                            euiLabel 
+                            class="eui-u-text-wrap">
+                            <span class="eui-u-font-bold">Digital Business Capability (DBC)</span>: A particular digital ability or capacity that an organisation may possess or exchange to achieve a specific purpose or outcome.
+                        </div>
+                    </li>
+                    <li euiListItem>
+                        <div 
+                            euiLabel 
+                            class="eui-u-text-wrap">
+                            <span class="eui-u-font-bold">National Digital Strategy Fit</span>: It reports the strategic priority assigned to the digital business capability by the national digital agenda of the country.
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                Score for the <span class="eui-u-font-bold">National Digital Strategic Fit</span> parameter <span class="eui-u-font-bold">(1 lowest, 5 highest)</span>:
+            </div>
+        </div>
+        <div class="row eui-u-mb-l eui-u-flex eui-u-flex-wrap">
+            <div class="col">
+                <ul euiList>
+                    <li euiListItem>
+                        <div
+                            euiLabel
+                            class="eui-u-text-wrap">
+                            1. <span class="eui-u-font-bold">Very low priority</span> (This DBC will be taken into account in the future).
+                        </div>
+                    </li>
+                    <li euiListItem>
+                        <div
+                            euiLabel
+                            class="eui-u-text-wrap">
+                            2. <span class="eui-u-font-bold">Low priority</span> (This DBC will be developed once the ones with medium priority are developed).
+                        </div>
+                    </li>
+                    <li euiListItem>
+                        <div
+                            euiLabel
+                            class="eui-u-text-wrap">
+                            3. <span class="eui-u-font-bold">Medium priority</span> (This DBC will be developed once the ones with high priority are developed).
+                        </div>
+                    </li>
+                    <li euiListItem>
+                        <div 
+                            euilabel
+                            class="eui-u-text-wrap">
+                            4. <span class="eui-u-font-bold">High priority</span> (This DBC will be developed once the ones with very high priority are developed).
+                        </div>
+                    </li>
+                    <li euiListItem>
+                        <div
+                            euiLabel
+                            class="eui-u-text-wrap">
+                            5. <span class="eui-u-font-bold">Very high priority</span> (This DBC has the highest priority in the development).
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</eui-dialog>

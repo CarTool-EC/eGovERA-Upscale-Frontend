@@ -1,0 +1,321 @@
+<eui-card euiCollapsible euiNoContentPadding>
+    <eui-card-header>
+        <eui-card-header-title>
+            Digital Business Capability Transformation Roadmap
+        </eui-card-header-title>
+    </eui-card-header>
+    <eui-card-content class="eui-u-font-s">
+        <div class="eui-u-pl-m eui-u-pt-m" id="dps-network">
+            <div class="row">
+                <div class="col-3">
+                    <div id="dps-network-info">
+                        <div>
+                            <div class="eui-u-font-bold" style="margin-bottom: 0.5rem;">
+                                Selected Digital Business Capability:
+                            </div>
+                            <div id="dps-network-bc-info">
+                                <div class="eui-u-mb-xs">
+                                    Name: <a href="{{DBC.Puri}}" target="_blank">{{ DBC.Name }}</a>
+                                </div>
+                                <div class="eui-u-mb-xs">
+                                    Policy: {{ DBC.Policy }}
+                                </div>
+                                <div class="eui-u-mb-xs">
+                                    Estimated budget (mill €): <span>{{ DBC.EstimatedBudget }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="eui-u-mt-s, eui-u-mb-s" />
+                        <form [formGroup]="relatedDPSForm" *ngIf="relatedDPSForm != null">
+                            <div class="eui-u-mt-s eui-u-mb-s eui-u-font-bold">
+                                Digital Public Services in scope:
+                            </div>
+                            <div class="dps-select-div mt-2" id="dps-select-info">
+                                <div *ngFor="let dps of DBC.RelatedDPSs" class="eui-u-display-flex eui-u-mb-s">
+                                    <input id="id-{{dps.Puri}}" formControlName="dpsForm-{{dps.Puri}}"
+                                        (change)="onCheckboxClick(dps)" euiInputCheckBox />
+                                    <label for="id-{{dps.Puri}}" euiLabel class="eui-u-font-s">
+                                        {{ dps.Name }}
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-9 adjust-heights">
+                    <div id="myNetwork" #dpsNetwork class="chart-area"
+                        style="border: 1px solid lightgray; height: 100%"></div>
+                </div>
+            </div>
+        </div>
+        <hr class="eui-u-mt-l eui-u-mb-m" />
+        <div class="row eui-u-mb-s">
+            <div class="col eui-u-flex eui-u-flex-justify-content-center">
+                <h3>Click on the steps of the Digital Transformation Roadmap where you need further detail</h3>
+            </div>
+        </div>
+        <div class="eui-u-pl-m eui-u-pt-m" id="view-network">
+            <div class="row">
+                <div class="col-3">
+                    <div id="view-network-info">
+                        <div>
+                            <div style="margin-bottom: 0.5rem;" class="eui-u-font-bold">
+                                Selected Digital Business Capability:
+                            </div>
+                            <div id="view-network-bc-info">
+                                <div class="eui-u-mb-xs">
+                                    Name: <a href="{{DBC.Puri}}" target="_blank">{{ DBC.Name }}</a>
+                                </div>
+                                <div class="eui-u-mb-xs">
+                                    Policy: {{ DBC.Policy }}
+                                </div>
+                                <div class="eui-u-mb-xs">
+                                    Estimated budget (mill €): <span>{{ DBC.EstimatedBudget }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="eui-u-mt-s, eui-u-mb-s" />
+                        <form [formGroup]="orientationForm">
+                            <div class="eui-u-mt-s eui-u-mb-s eui-u-font-bold">
+                                Implementation orientation for the digital transformation:
+                            </div>
+                            <div>
+                                <ul>
+                                    <li style="width: 90%;">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <span class="eui-u-font-bold">
+                                                    View
+                                                </span>
+                                            </div>
+                                            <div class="col-6 eui-u-text-center">
+                                                <span class="eui-u-font-bold eui-u-cursor-help" euiTooltip="Click the arrows to change the implementation orientation. For a suggested implementation click the link below">
+                                                    Order selection
+                                                    <eui-icon-svg icon="eui-question-circle" set="eui" size="xs" fillColor="grey-100"></eui-icon-svg>
+                                                </span>
+                                            </div>
+                                            <hr class="eui-u-mt-s"/>
+                                        </div>
+                                    </li>
+                                    <li *ngFor="let view of viewList; index as i" style="width: 90%;">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <span>{{ view.name }}</span>
+                                            </div>
+                                            <div class="col-6 eui-u-text-center">
+                                                <span>
+                                                    <button 
+                                                        [euiDisabled]="isFirst(view)"
+                                                        euiButton 
+                                                        euiIconButton 
+                                                        euiBasicButton 
+                                                        euiSizeXS 
+                                                        (click)="onOrientationClick(view, true)">
+                                                        <eui-icon-svg icon="eui-arrow-up"></eui-icon-svg>
+                                                    </button>
+                                                </span>
+                                                <span>
+                                                    <button 
+                                                        [euiDisabled]="isLast(view)"
+                                                        euiButton 
+                                                        euiIconButton 
+                                                        euiBasicButton 
+                                                        euiSizeXS 
+                                                        (click)="onOrientationClick(view, false)">
+                                                        <eui-icon-svg icon="eui-arrow-down"></eui-icon-svg>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                            <hr />
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- <mat-radio-group formControlName="orientation" (change)="onOrientationClick()">
+                                <div>
+                                    <mat-radio-button [value]="1">
+                                        <div class="eui-u-font-s">
+                                            Legal
+                                        </div>
+                                    </mat-radio-button>
+                                </div>
+                                <div>
+                                    <mat-radio-button [value]="2">
+                                        <div class="eui-u-font-s">
+                                            Organisational
+                                        </div>
+                                    </mat-radio-button>
+                                </div>
+                                <div>
+                                    <mat-radio-button [value]="3">
+                                        <div class="eui-u-font-s">
+                                            Semantic
+                                        </div>
+                                    </mat-radio-button>
+                                </div>
+                                <div>
+                                    <mat-radio-button [value]="4">
+                                        <div class="eui-u-font-s">
+                                            Technical
+                                        </div>
+                                    </mat-radio-button>
+                                </div>
+                            </mat-radio-group> -->
+                        </form>
+                        <div>
+                            <div class="eui-u-mt-s eui-u-mb-s eui-u-font-bold">
+                                For a suggested implementation click <a href="https://idpsio-test.herokuapp.com/" target="_blank">here</a>
+                            </div>
+                        </div>
+                        <!-- <hr class="eui-u-mt-s, eui-u-mb-s" />
+                        <div class="row eui-u-mt-xl">
+                            <div class="col-9">
+                                Show business agnostic nodes
+                            </div>
+                            <div class="col-3">
+                                <eui-slide-toggle isChecked (slideToggleChange)="onSlideToggleChange($event)">
+                                </eui-slide-toggle>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="col-9 adjust-heights">
+                    <div id="otherNetwork" #viewNetwork class="chart-area"
+                        style="border: 1px solid lightgray; height: 100%"></div>
+                </div>
+            </div>
+        </div>
+        <hr *ngIf="showAbbNetwork" class="eui-u-mt-l eui-u-mb-m" />
+        <div class="row eui-u-mb-s" [hidden]="!showAbbNetwork">
+            <div class="col eui-u-flex eui-u-flex-justify-content-center">
+                <h3>Assessment of the functionalities supporting the digital business capability</h3>
+            </div>
+        </div>
+        <div class="eui-u-pl-m eui-u-pt-m" id="abb-network" [hidden]="!showAbbNetwork">
+            <div class="row">
+                <div class="col-3">
+                    <div id="abb-network-info">
+                        <div>
+                            <div style="margin-bottom: 0.5rem;" class="eui-u-font-bold">
+                                Selected Digital Business Capability:
+                            </div>
+                            <div id="abb-network-bc-info">
+                                <div class="eui-u-mb-xs">
+                                    Name: <a href="{{DBC.Puri}}" target="_blank">{{ DBC.Name }}</a>
+                                </div>
+                                <div class="eui-u-mb-xs">
+                                    Policy: {{ DBC.Policy }}
+                                </div>
+                                <div class="eui-u-mb-xs">
+                                    Estimated budget (mill €): <span>{{ DBC.EstimatedBudget }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="eui-u-mt-s, eui-u-mb-s" />
+                        <div>
+                            <div class="eui-u-mt-s eui-u-mb-s eui-u-font-bold">
+                                Selected Digital Public Service<span *ngIf="selectedDPSList.length > 1">s</span>:
+                            </div>
+                            <div>
+                                <ul *ngFor="let dps of selectedDPSList">
+                                    <li>
+                                        <a href="{{dps.Puri}}" target="_blank">
+                                            {{ dps.Name }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <hr class="eui-u-mt-s, eui-u-mb-s" />
+                        <div>
+                            <div class="eui-u-mt-s eui-u-mb-s eui-u-font-bold">
+                                Selected view:
+                            </div>
+                            <div class="eui-u-mb-xs">
+                                Policy domain: {{ selectedView.Policy }}
+                            </div>
+                            <div class="eui-u-mb-xs">
+                                Name: {{ selectedView.Name }}
+                            </div>
+                        </div>
+                        <hr class="eui-u-mt-s, eui-u-mb-s" />
+                        <div>
+                            <div class="eui-u-mt-s eui-u-mb-s eui-u-font-bold">
+                                Selected Architecture Building Block:
+                            </div>
+                            <div *ngIf="selectedABB != null">
+                                <div class="eui-mb-xs">
+                                    Name: <a href="{{selectedABB.Puri}}" target="_blank">{{ selectedABB.Name }}</a>
+                                </div>
+                                <div class="eui-mb-xs">
+                                    Support Ability: {{ assessment.ArchitectureBuildingBlock[selectedABB.Puri] != undefined ? assessment.ArchitectureBuildingBlock[selectedABB.Puri].SupportAbility : 1 }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-9 adjust-heights">
+                    <div id="testNetwork" #abbNetwork class="chart-area"
+                        style="border: 1px solid lightgray; height: 100%"></div>
+                </div>
+            </div>
+        </div>
+        <hr *ngIf="abbList.length > 0 && showAbbNetwork" class="eui-u-mt-l eui-u-mb-m" />
+        <div *ngIf="abbList.length > 0 && showAbbNetwork" class="eui-u-inline-flex eui-u-flex-column">
+            <div class="row eui-u-mb-s">
+                <div class="col eui-u-flex eui-u-flex-justify-content-center">
+                    <h3>eGovERA Building Blocks</h3>
+                </div>
+            </div>
+            <div>
+                <table 
+                    euiTable 
+                    euiTableResponsive 
+                    euiTableBordered 
+                    class="eui-table__scrollable-wrapper eui-u-font-2xs"
+                    [rows]="abbList">
+                    <ng-template euiTemplate="header">
+                        <tr>
+                            <th class="eui-u-text-center">Name</th>
+                            <th class="eui-u-text-center">View</th>
+                            <th class="eui-u-text-center">Description</th>
+                            <th class="eui-u-text-center" width="50">Related DBC</th>
+                            <th class="eui-u-text-center" width="50">Related DPS</th>
+                            <th class="eui-u-text-center" width="50">Successors</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template let-row euiTemplate="body">
+                        <tr>
+                            <td style="vertical-align: text-top;" data-col-label="Name">
+                                <a href="{{row.Puri}}" target="_blank">{{ row.Name }}</a>
+                            </td>
+                            <td style="vertical-align: text-top;" data-col-label="View">{{ row.View }}</td>
+                            <td style="vertical-align: text-top;" data-col-label="Description">{{ row.Description }}</td>
+                            <td style="vertical-align: text-top;" data-col-label="RelatedDBCs" width="50">
+                                <ul *ngFor="let puri of row.RelatedDBCs">
+                                    <li>
+                                        <a href="{{puri}}" target="_blank">{{prettyfyUri(puri)}}</a>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td style="vertical-align: text-top;" data-col-label="RelatedDPSs" width="50">
+                                <ul *ngFor="let puri of row.RelatedDPSs">
+                                    <li>
+                                        <a href="{{puri}}" target="_blank">{{prettyfyUri(puri)}}</a>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td style="vertical-align: text-top;" data-col-label="Successors" width="50">
+                                <ul *ngFor="let puri of row.Successors">
+                                    <li>
+                                        <a href="{{puri}}" target="_blank">{{prettyfyUri(puri)}}</a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </table>
+            </div>
+        </div>
+    </eui-card-content>
+</eui-card>
