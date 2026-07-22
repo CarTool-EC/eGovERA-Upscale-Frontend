@@ -37,7 +37,7 @@ export class InitializationFormComponent implements OnInit {
 
   public isUploadingModel: boolean = false;
   public isDeletingModel: boolean = false;
-  public isUploadModelAvailable: boolean = false;
+  public isUploadModelAvailable: boolean = true;
 
   public lDBCByDomain = {businessAgnostic: [], customs: [], health: [], taxes: []};
 
