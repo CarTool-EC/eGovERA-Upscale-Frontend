@@ -5,7 +5,8 @@ export class DigitalPublicService {
         public Description: string,
         public Policy: string,
         public View: string,
-        public RelatedDBCs: string[]
+        public RelatedDBCs: string[],
+        public RelatedABBs: string[]
     ) {};
 
     public static fromJson(pJson: any): DigitalPublicService {
@@ -16,6 +17,7 @@ export class DigitalPublicService {
             pJson.Policy,
             pJson.View,
             pJson.RelatedDBCs,
+            pJson.RelatedABBs
         );
     }
 
@@ -26,7 +28,8 @@ export class DigitalPublicService {
             pJson.Description,
             pJson.Policy,
             "N/A",
-            pJson.Digital_Business_Capability
+            pJson.Digital_Business_Capability,
+            []
         );
     }
 }

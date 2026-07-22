@@ -1,7 +1,7 @@
 {
     "modules": {
         "core": {
-            "base": "SERVER_HOST/api",
+            "base": "http://localhost:8080/api",
             "userDetails": "/user-details"
         }
     }

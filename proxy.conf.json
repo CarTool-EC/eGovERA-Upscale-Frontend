@@ -1,7 +1,7 @@
 {
     "/api/resources/**": {
-        "target": "http://localhost:9996",
-        "secure": false,
+        "target": "http://localhost:8080",
+        "secure": true,
         "changeOrigin": true,
         "logLevel": "debug"
     } 

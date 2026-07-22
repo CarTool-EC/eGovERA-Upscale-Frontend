@@ -4,33 +4,59 @@ import autoTable from 'jspdf-autotable';
 import { DigitalBusinessCapability } from '@shared/classes/DigitalBusinessCapability.class';
 import { Assessment } from '@shared/classes/Assessment.class';
 import { StorageService } from '@shared/services/storage.service';
+import { ArchitectureBuildingBlock } from '@shared/classes/ArchitectureBuildingBlock.class';
+import { DigitalPublicService } from '@shared/classes/DigitalPublicService.class';
+import { EuiDialogComponent } from '@eui/components/eui-dialog';
 
 @Component({
   selector: 'app-decision-support',
   templateUrl: './decision-support.component.html',
-  styleUrl: './decision-support.component.scss'
+  standalone: false
 })
-export class DecisionSupportComponent {
+export class DecisionSupportComponent implements OnInit {
+  @ViewChild('downloadPDFDialog') downloadPDFDialog: EuiDialogComponent;
+
   public loadedSurvey: Assessment[] = [];
   public selectedDBC: DigitalBusinessCapability = null;
   public selectedAssessment: Assessment = null;
   public contactInfo: any = null;
+  public disableExport: boolean = true;
 
   public showPortfolioManagement: boolean = false;
   public showRoadmap: boolean = false;
   public showExport: boolean = false;
   public downloadPDF: any = null;
+  
+  public downloadInProgress: boolean = true;
+
+  public completeDomainList: { id: string, value: string }[] = [
+    { id: 'businessAgnostic', value: 'Business Agnostic' },
+    { id: 'customs', value: 'Customs' },
+    { id: 'health', value: 'Health' },
+    { id: 'taxes', value: 'Taxes' },
+  ];
 
   public requestDataFromPortfolioManagement: any = null;
 
   public portfolioManagementData: any = null;
   public PDFName: string = "decision-support.pdf";
 
+  public loading: boolean = true;
+
   constructor(
     private storageService: StorageService
   ) { }
 
+  ngOnInit() {
+    this.storageService.getReady().subscribe(ready => {
+      if (ready) {
+        this.loading = false;
+      }
+    });
+  }
+
   public uploadSurvey(event: any): void {
+    this.disableExport = true;
     this.loadedSurvey = [];
     this.selectedDBC = null;
     this.selectedAssessment = null;
@@ -43,15 +69,52 @@ export class DecisionSupportComponent {
     fileReader.onload = (e) => {
       let result = e.target.result;
       if (typeof result === 'string') {
-        let loadedData: { data: any[], contactInfo: any } = JSON.parse(result);
+        const parsed = JSON.parse(result);
+        
+        const loadedData = {
+          data: parsed.data,
+          contactInfo: parsed.contactInfo,
+          selectedDomainList: parsed.selectedDomainList,
+          modelDBCs: parsed.modelDBCs,
+          modelABBsMap: new Map<string, ArchitectureBuildingBlock[]>(Object.entries(parsed.modelABBsMap)),
+          modelDPSsMap: new Map<string, DigitalPublicService[]>(Object.entries(parsed.modelDPSsMap))
+        };
+        this.storageService.setAdHocRequirementsMap(loadedData.modelABBsMap)
+        this.storageService.setAdHocDPSsMap(loadedData.modelDPSsMap)
+        
+
+        const surveyAssessments: Assessment[] = loadedData.data.map(data =>
+          Assessment.parseAssessmentSurvey(data)
+        );
+
+        surveyAssessments.forEach((assessment: Assessment) => {
+          const assessedDomain = this.completeDomainList.find(
+            element => element.value === assessment.Policy
+          );
+          if (!assessedDomain) return;
+
+          const domainId = assessedDomain.id;
+          const models = loadedData.modelDBCs[domainId] || [];
+
+          for (const model of models) {
+            this.storageService.addAdHocDBCs(model.modelName, model.DBCs)
+          }
+        })
+
         loadedData.data.forEach((data: any) => {
           this.loadedSurvey.push(Assessment.parseAssessmentSurvey(data));
         });
 
         this.contactInfo = loadedData.contactInfo;
 
-        console.log("Survey: ", this.loadedSurvey);
-        this.showPortfolioManagement = true;
+        if (this.loadedSurvey.length != 0) {
+          this.disableExport = false;
+          this.showPortfolioManagement = true;
+          this.loadedSurvey.sort((a, b) => a.Name > b.Name ? (a.Policy > b.Policy ? 1 : -1) : (a.Policy > b.Policy ? 1 : -1));
+        } else {
+          alert("Error: file has no relevant content");
+        }
+        
       } else {
         alert('Error: unsupported file uploaded.')
       }
@@ -80,6 +143,8 @@ export class DecisionSupportComponent {
   }
 
   public onExportClick() {
+    this.downloadInProgress = true;
+    this.downloadPDFDialog.openDialog();
     this.requestDataFromPortfolioManagement = true;
   }
 
@@ -88,10 +153,17 @@ export class DecisionSupportComponent {
       this.downloadPDF = lPDF;
     } else {
       lPDF.save(this.PDFName);
+      this.closeDownloadDialog();
     }
   }
 
+  public closeDownloadDialog(): void {
+    this.downloadPDFDialog.closeDialog();
+    this.downloadInProgress = false;
+  }
+
   private createPDF(): void {
+    console.log("here");
     const lPDF = new jsPDF();
     this.addIntroductionPage(lPDF);
 
@@ -130,7 +202,7 @@ export class DecisionSupportComponent {
     pPDF.text(lSentence1, ...lSentence1Coords);
 
     // Add sentence2
-    const lSentence2 = "Unit.D2";
+    const lSentence2 = "Unit.B2";
     const lSentence2Coords = [93, 70];
     pPDF.text(lSentence2, ...lSentence2Coords);
 
@@ -196,7 +268,7 @@ export class DecisionSupportComponent {
     pPDF.text(lTopSentence, ...lTopSentenceCoords);
 
 
-    const lLeftSentence = "Copyright © European Commission 2022";
+    const lLeftSentence = "Copyright © European Commission 2025";
     const lLeftSentenceCoords = [10, 292]; // x, y
     pPDF.setTextColor(192, 192, 192);
     pPDF.setFontType("italic");

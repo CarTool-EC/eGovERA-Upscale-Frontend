@@ -6,7 +6,8 @@
         <app-initialization-form 
             *ngIf="showInitializationForm" 
             (startAssessment)="onStartAssessmentClick($event)"
-            (loadedSurvey)="onLoadedSurvey($event)">
+            (loadedSurvey)="onLoadedSurvey($event)"
+            (sendModelDBCs)="onsendModelDBCs($event)">
         </app-initialization-form>
 
         <app-capability-assessment
@@ -14,8 +15,10 @@
             [selectedDomains]="selectedDomainList"
             [previouslySelectedDBCs]="selectedDBCs"
             [assessments]="assessments"
+            [modelDBCs]="modelDBCs"
             (capabilityAssessment)="onCapabilityAssessmentFinish($event)"
-            (pauseAssessment)="onPauseAssessmentClick($event)"
+            (downloadAssessment)="downloadAssessmentJson($event)"
+            (pauseAssessment)="onPauseAssessmentClick()"
             (returnToStart)="onReturnToStartFormClick($event)">
         </app-capability-assessment>
 
@@ -25,13 +28,16 @@
             [selectedDBCs]="selectedDBCs"
             [assessments]="assessments"
             (finalizedAssessments)="finalizeAssessment($event)"
-            (pauseAssesment)="onPauseAssessmentClick($event)"
+            (downloadAssessment)="downloadAssessmentJson($event)"
+            (pauseAssessment)="onPauseAssessmentClick()"
             (return)="onReturnClick($event)">
         </app-requirements-assessment>
         
         <app-survey-download
             *ngIf="showSurveyDownload"
             [assessments]="assessments"
+            [selectedDomains]="selectedDomainList"
+            [modelDBCs]="modelDBCs"
             [contactInfo]="contactInfo">
         </app-survey-download>
     </eui-page-content>

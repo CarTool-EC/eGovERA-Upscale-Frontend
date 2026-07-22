@@ -23,7 +23,8 @@
         "Name": "Audit ",
         "Description": "Digital Public Service enabling inspection and evaluation of the quality of the information processed by information systems, and to determine the conformance to policies, contract commitments, and regulatory requirements.",
         "Digital_Business_Capability": [
-            "http://data.europa.eu/dr8/egovera/ElectronicIdentificationCapability"
+            "http://data.europa.eu/dr8/egovera/ElectronicIdentificationCapability",
+            "http://data.europa.eu/dr8/egovera/InternalInspectionAndAuditingCapability"
         ]
     },
     {
@@ -32,7 +33,8 @@
         "Name": "Secure Access Control",
         "Description": "Digital Public Service enabling the definition of user permissions for allowed operations (e.g. view and/or update) on specific resources (e.g. web pages, documents, etc), and the tracking of user operations.(aka: Permission management)",
         "Digital_Business_Capability": [
-            "http://data.europa.eu/dr8/egovera/ElectronicIdentificationCapability"
+            "http://data.europa.eu/dr8/egovera/ElectronicIdentificationCapability",
+            "http://data.europa.eu/dr8/egovera/TaxRiskManagementCapability"
         ]
     },
     {
@@ -41,7 +43,8 @@
         "Name": "Delegation of Power",
         "Description": "Digital Public Service enabling the delegation management via digital means, to delegate responsibilities from an individual invested with certain powers to another one, and to track the related delegation acts.",
         "Digital_Business_Capability": [
-            "http://data.europa.eu/dr8/egovera/ElectronicIdentificationCapability"
+            "http://data.europa.eu/dr8/egovera/ElectronicIdentificationCapability",
+            "http://data.europa.eu/dr8/egovera/TaxRiskManagementCapability"
         ]
     },
     {
@@ -150,7 +153,8 @@
         "Name": "Data Analytics ",
         "Description": "Digital Public Service enabling the management and analysis of data, to drive business processes and improve business outcomes through more effective decision making and enhanced customer experiences.",
         "Digital_Business_Capability": [
-            "http://data.europa.eu/dr8/egovera/DataManagementCapability"
+            "http://data.europa.eu/dr8/egovera/DataManagementCapability",
+            "http://data.europa.eu/dr8/egovera/InternalInspectionAndAuditingCapability"
         ]
     },
     {
@@ -159,7 +163,8 @@
         "Name": "Workflow Management",
         "Description": "Digital Public Service enabling the configuration and automation of business processes composed of both manual and automatic tasks.",
         "Digital_Business_Capability": [
-            "http://data.europa.eu/dr8/egovera/CaseAndWorkflowManagementCapability"
+            "http://data.europa.eu/dr8/egovera/CaseAndWorkflowManagementCapability",
+            "http://data.europa.eu/dr8/egovera/InternalInspectionAndAuditingCapability"
         ]
     },
     {
@@ -204,7 +209,8 @@
         "Name": "ePayment ",
         "Description": "Digital Public Service enabling individuals and organisations to purchase goods or services via digital or online modes, without the involvement of physical money exchange. It provides the possibility to perform financial operations using digital payment methods such as, among others, Banking Cards and Point of Sale (PoS) terminals.",
         "Digital_Business_Capability": [
-            "http://data.europa.eu/dr8/egovera/DigitalPaymentsCapability"
+            "http://data.europa.eu/dr8/egovera/DigitalPaymentsCapability",
+            "http://data.europa.eu/dr8/egovera/RevenueFeeCollectionForRegularAndSpecialCasesCapability"
         ]
     },
     {
@@ -231,7 +237,8 @@
         "Name": "eTendering",
         "Description": "Digital Public Service enabling the electronic end-to-end management of the purchasing process and related tasks associated to the acquisition of third-party goods and/or services through digital means and information and communication technologies.",
         "Digital_Business_Capability": [
-            "http://data.europa.eu/dr8/egovera/DigitalProcurementCapability"
+            "http://data.europa.eu/dr8/egovera/DigitalProcurementCapability",
+            "http://data.europa.eu/dr8/egovera/RevenueFeeCollectionForRegularAndSpecialCasesCapability"
         ]
     },
     {
@@ -241,6 +248,366 @@
         "Description": "Digital Public Service enabling public administrations and businesses accelerate the creation and verification of electronic signatures that are legally valid in all European Member States.",
         "Digital_Business_Capability": [
             "http://data.europa.eu/dr8/egovera/DigitalProcurementCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/RevenueTrackingAndAnalysisBusinessService",
+        "Policy": "Taxes",
+        "Name": "Revenue tracking and analysis",
+        "Description": "Revenue tracking and analysis is a crucial IT concept that involves the use of technology to monitor, analyze, and report on an organization's income. It provides insights into the financial health of a business, helping to identify trends, forecast future revenues, and make informed decisions.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/EconomicEventsMonitoringCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/LoansAndMortgagesRegistryManagmenetBusinessService",
+        "Policy": "Taxes",
+        "Name": "Loans and mortgages registry management",
+        "Description": "Loans and Mortgages Registry Management is an IT concept that involves the use of software or systems to manage, track, and organize loan and mortgage data. This includes information about borrowers, lenders, loan amounts, interest rates, payment schedules, and more.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/EconomicEventsMonitoringCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/Macro-economicFrameworkBusinessService",
+        "Policy": "Taxes",
+        "Name": "Macro-economic framework",
+        "Description": "The Macro-economic Framework is a concept in IT that involves the use of digital tools and software to analyze, model, and interpret macroeconomic data and trends. It is widely used in economic forecasting, policy analysis, and decision-making processes.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/EconomicEventsMonitoringCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/FinancialFlowsManagementBusinessService",
+        "Policy": "Taxes",
+        "Name": "Financial flows management",
+        "Description": "Financial flows management refers to the use of IT systems and software to monitor, control, and optimize the movement of money within an organization. It involves tracking income and expenses, managing investments, and planning for future financial needs.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/EconomicEventsMonitoringCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/BankinngAccountsMonitoringBusinessService",
+        "Policy": "Taxes",
+        "Name": "Bankinng accounts monitoring",
+        "Description": "Banking accounts monitoring is an IT concept that involves the use of technology to track, analyze, and manage the activities and transactions in a bank account. It is a crucial aspect of modern banking systems, helping to enhance security, detect fraud, and improve customer service.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/EconomicEventsMonitoringCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/ConfiscatedAssetsRegistryManagementBusinessService",
+        "Policy": "Taxes",
+        "Name": "Confiscated assets registry management",
+        "Description": "Confiscated Assets Registry Management is an IT concept that involves the use of technology to track, manage, and record assets that have been seized or confiscated by authorities. This can include physical assets like property and vehicles, as well as digital assets like bank accounts and cryptocurrencies.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/InternalInspectionAndAuditingCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/InternalAuditingBusinessService",
+        "Policy": "Taxes",
+        "Name": "Internal Auditing",
+        "Description": "Internal auditing is a crucial IT concept that involves the systematic evaluation of an organization's IT infrastructure, operations, and processes. It is designed to identify potential risks and inefficiencies, ensuring that the organization complies with relevant laws, regulations, and standards.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/InternalInspectionAndAuditingCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/TaxPre-AuditAndDue-DiligenceManagementBusinessService",
+        "Policy": "Taxes",
+        "Name": "Tax Pre-Audit and Due-Diligence management",
+        "Description": "Tax Pre-Audit and Due-Diligence Management is an IT concept that involves the use of technology to manage and streamline the process of tax pre-audit and due diligence. This includes the use of software and systems to automate tasks, improve accuracy, reduce errors, and ensure compliance with tax laws and regulations.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/InternalInspectionAndAuditingCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/WorkforceAllocationBusinessService",
+        "Policy": "Taxes",
+        "Name": "Workforce Allocation",
+        "Description": "Workforce allocation is a strategic IT concept that involves the effective distribution and assignment of tasks and responsibilities among employees or teams within an organization. It is crucial for optimizing productivity, managing resources efficiently, and ensuring the timely completion of projects.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/InternalInspectionAndAuditingCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/Cross-borderEUClaimsManagementBusinessService",
+        "Policy": "Taxes",
+        "Name": "Cross-border EU claims management",
+        "Description": "Cross-border EU Claims Management is an IT concept that involves the use of technology to manage, process, and settle claims that arise from cross-border transactions within the European Union. This concept is particularly relevant in the insurance, finance, and e-commerce sectors.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/InternationalTaxInformationCollectionCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/ThirdCountriesClaimsRecoveryBusinessService",
+        "Policy": "Taxes",
+        "Name": "Third countries claims recovery",
+        "Description": "Third Countries Claims Recovery is an IT concept that involves the use of technology to facilitate the process of recovering claims from third-party countries. This is often used in the insurance and healthcare sectors where claims need to be recovered from entities in other countries.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/InternationalTaxInformationCollectionCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/TangibleAssetsRegistryManagementForPropertiesBusinessService",
+        "Policy": "Taxes",
+        "Name": "Tangible assets (properties) registry management",
+        "Description": "Tangible Assets (Properties) Registry Management refers to the use of IT systems and software to record, track, manage, and analyze the physical assets owned by an organization or individual. These assets can include buildings, land, machinery, vehicles, and other physical properties.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/NationalTaxSystemGovernanceCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/EconomicActivityCodesRegistryManagementBusinessService",
+        "Policy": "Taxes",
+        "Name": "Economic activity codes registry management Digital Public Service",
+        "Description": "Economic Activity Codes Registry Management is an IT concept that involves the use of software or systems to manage, organize, and maintain the registry of codes that represent various economic activities in a particular economy. These codes are used for statistical, regulatory, and taxation purposes.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/NationalTaxSystemGovernanceCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/IntangibleAssetsRegistryManagementBusinessService",
+        "Policy": "Taxes",
+        "Name": "Intangible assets registry management Digital Public Service",
+        "Description": "Intangible Assets Registry Management is an IT concept that involves the use of software or systems to track, manage, and optimize the use of an organization's intangible assets. These assets may include intellectual property, brand equity, customer relationships, and proprietary technology.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/NationalTaxSystemGovernanceCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/TangibleAssetsRegistryManagementForMobileAssetsBusinessService",
+        "Policy": "Taxes",
+        "Name": "Tangible assets (mobile assets) registry management Digital Public Service",
+        "Description": "Tangible Assets (Mobile Assets) Registry Management is an IT concept that involves the use of software or systems to track, manage, and maintain a record of an organization's tangible or mobile assets. These assets could range from computers, vehicles, equipment, to any other physical assets that can be moved around.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/NationalTaxSystemGovernanceCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/HeritagesAndRentingsManagementBusinessService",
+        "Policy": "Taxes",
+        "Name": "Heritages and rentings management Digital Public Service",
+        "Description": "The 'Heritages and Rentings Management' IT concept refers to the use of information technology tools and systems to manage, track, and control the renting and heritage properties. This includes tasks such as tenant management, rent tracking, property maintenance, and heritage property preservation.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/NationalTaxSystemGovernanceCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/EuropeanTaxCatalogManagementBusinessService",
+        "Policy": "Taxes",
+        "Name": "European tax catalog management Digital Public Service",
+        "Description": "European Tax Catalog Management is an IT concept that involves the use of software or systems to manage, organize, and maintain tax-related data in accordance with the tax laws and regulations of European countries. It is crucial for businesses operating in Europe to ensure compliance and accuracy in tax reporting.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/NationalTaxSystemGovernanceCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/StateTaxCatalogManagementBusinessService",
+        "Policy": "Taxes",
+        "Name": "State tax catalog management Digital Public Service",
+        "Description": "State Tax Catalog Management is an IT concept that involves the use of software or systems to manage, organize, and maintain a catalog of various state taxes. This can include information about tax rates, tax laws, and other related data.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/NationalTaxSystemGovernanceCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/PropertyTaxCalculationAndPaymentBusinessService",
+        "Policy": "Taxes",
+        "Name": "Property Tax calculation and payment Digital Public Service",
+        "Description": "The Property Tax Calculation and Payment IT concept refers to the use of information technology systems and software to calculate, manage, and pay property taxes. These systems can automate the process, reducing errors and increasing efficiency.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/RevenueFeeCollectionForRegularAndSpecialCasesCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/EnvironmentalTaxCalculationAndPaymentBusinessService",
+        "Policy": "Taxes",
+        "Name": "Environmental Tax calculation and payment Digital Public Service",
+        "Description": "The Environmental Tax Calculation and Payment IT Concept refers to the use of information technology systems and software to calculate and process payments for environmental taxes. These taxes are levied on businesses and individuals for their environmental impact, such as carbon emissions, waste production, and resource consumption.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/RevenueFeeCollectionForRegularAndSpecialCasesCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/ValueAddedTaxCalculationAndPaymentBusinessService",
+        "Policy": "Taxes",
+        "Name": "Value Added Tax calculation and payment Digital Public Service",
+        "Description": "Value Added Tax (VAT) calculation and payment is an IT concept that involves the use of software or systems to calculate and pay VAT. This is often used by businesses to ensure they are accurately calculating and paying their VAT to the relevant tax authorities.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/RevenueFeeCollectionForRegularAndSpecialCasesCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/IncomeTaxCalculationAndPaymentBusinessService",
+        "Policy": "Taxes",
+        "Name": "Income Tax calculation and payment Digital Public Service",
+        "Description": "This IT concept refers to the digital process of calculating and paying income tax. It involves the use of software or online platforms to compute tax liabilities based on income details, deductions, and tax rates. The system also facilitates the online payment of the calculated tax, making the entire process efficient and convenient.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/RevenueFeeCollectionForRegularAndSpecialCasesCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/InterestsAndPenaltiesBusinessService",
+        "Policy": "Taxes",
+        "Name": "Interests and penalties Digital Public Service",
+        "Description": "Interests and penalties in IT refer to the additional charges or deductions applied to a user or a system for non-compliance with the terms and conditions or for late payments. These are often used in software licensing, cloud services, and online subscriptions.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/RevenueFeeCollectionForRegularAndSpecialCasesCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/ExciseTaxCalculationAndPaymentBusinessService",
+        "Policy": "Taxes",
+        "Name": "Excise Tax calculation and payment Digital Public Service",
+        "Description": "The concept of Excise Tax calculation and payment in IT refers to the use of software or digital tools to calculate, track, and pay excise taxes. These systems are designed to automate and streamline the process, reducing errors and ensuring compliance with tax laws.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/RevenueFeeCollectionForRegularAndSpecialCasesCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/TaxHistoryManagementBusinessService",
+        "Policy": "Taxes",
+        "Name": "Tax history management Digital Public Service",
+        "Description": "Tax History Management is an IT concept that involves the use of software or systems to record, track, and manage an individual's or company's tax data over a certain period. It helps in maintaining accurate records, ensuring compliance, and facilitating tax planning and auditing processes.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/TaxHistoricalSeriesAnalysisAndTaxCasesManagementCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/MyTaxesBusinessService",
+        "Policy": "Taxes",
+        "Name": "MyTaxes Digital Public Service",
+        "Description": "MyTaxes is an IT concept that refers to a digital platform or software application designed to simplify the process of filing and managing taxes. It allows users to easily track their income, calculate taxes, and submit their tax returns online, reducing the need for physical paperwork and making the tax filing process more efficient.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/TaxPlanningCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/TaxCalendarBusinessService",
+        "Policy": "Taxes",
+        "Name": "Partrimony analysis Digital Public Service",
+        "Description": "Patrimony Analysis is an IT concept that refers to the process of evaluating and managing the entire set of assets (tangible or intangible) owned by an organization. This includes software, hardware, data, and intellectual property. It helps in understanding the value, usage, and lifecycle of these assets, thereby aiding in strategic decision-making.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/TaxPlanningCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/TaxpayerRegistryManagementForPrivateCompaniesBusinessService",
+        "Policy": "Taxes",
+        "Name": "Taxpayer (Private Companies) registry management Digital Public Service",
+        "Description": "Taxpayer (Private Companies) Registry Management is an IT concept that involves the use of software or systems to manage and maintain the records of private companies for taxation purposes. It includes the collection, storage, retrieval, and updating of taxpayer information.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/TaxProfessionalsRegistryManagementCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/TaxProfessionalsAndAgentsRegistryManagementBusinessService",
+        "Policy": "Taxes",
+        "Name": "Tax professionals and agents registry management Digital Public Service",
+        "Description": "This IT concept refers to the use of information technology systems to manage and maintain a registry of tax professionals and agents. It involves the collection, storage, and processing of data related to tax professionals and agents, including their credentials, areas of expertise, and contact information.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/TaxProfessionalsRegistryManagementCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/TaxpayerRegistryManagementForPublicAdministrationsBusinessService",
+        "Policy": "Taxes",
+        "Name": "Taxpayer (Public Administrations) registry management Digital Public Service",
+        "Description": "Taxpayer Registry Management is an IT concept that involves the use of digital systems to manage, organize, and maintain the records of taxpayers in public administrations. It is a critical component in the efficient collection of taxes and the provision of public services.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/TaxProfessionalsRegistryManagementCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/FiscalProfessionsAndQualificationsRegistryManagementBusinessService",
+        "Policy": "Taxes",
+        "Name": "Fiscal professions and qualifications registry management Digital Public Service",
+        "Description": "This concept refers to the IT system or solution that manages the registry of fiscal professions and their respective qualifications. It involves the use of software or applications to track, update, and maintain records of professionals in the fiscal field, their qualifications, certifications, and other relevant information.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/TaxProfessionalsRegistryManagementCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/TaxpayerRegistryManagementForIndividualsBusinessService",
+        "Policy": "Taxes",
+        "Name": "Taxpayer (Individuals) registry management Digital Public Service",
+        "Description": "Taxpayer (Individuals) Registry Management is an IT concept that involves the use of technology to manage, organize, and maintain a database of individual taxpayers. It includes the collection, storage, and processing of taxpayer data such as personal information, income details, tax liabilities, and payment history.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/TaxProfessionalsRegistryManagementCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/Anti-fraudManagementBusinessService",
+        "Policy": "Taxes",
+        "Name": "Anti-fraud management Digital Public Service",
+        "Description": "Anti-fraud management is a set of IT practices and solutions designed to detect, prevent, and mitigate fraudulent activities in an organization. It involves the use of advanced technologies such as artificial intelligence, machine learning, and data analytics to identify and analyze patterns of fraudulent behavior.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/TaxRiskManagementCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/Anti-TaxReturnsControlBusinessService",
+        "Policy": "Taxes",
+        "Name": "Tax returns control",
+        "Description": "Tax Returns Control is an IT concept that refers to the use of information technology systems and tools to manage, process, and control the filing of tax returns. It involves the use of software to automate tax calculations, ensure compliance with tax laws, and facilitate the efficient and accurate filing of tax returns.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/TaxRulesManagementForProcessingTaxReturnsCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/AdvanceTaxRulingBusinessService",
+        "Policy": "Taxes",
+        "Name": "Advance Tax ruling Digital Public Service",
+        "Description": "Advance Tax Ruling is a concept in taxation where a taxpayer can get a binding ruling about the tax implications of a proposed transaction or arrangement. This is usually done before the transaction is implemented to provide certainty about the tax treatment.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/TaxRulesManagementForProcessingTaxReturnsCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/FullTaxableBaseDiscoveryBusinessService",
+        "Policy": "Taxes",
+        "Name": "Full taxable base discovery Digital Public Service",
+        "Description": "Full Taxable Base Discovery is an IT concept that involves the use of technology to identify, assess, and collect all taxable assets within a given jurisdiction. It is often used by tax authorities to ensure that all taxable entities are accurately reported and taxed accordingly.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/TaxRulesManagementForProcessingTaxReturnsCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/DisputeRegistryManagementBusinessService",
+        "Policy": "Taxes",
+        "Name": "Dispute registry management Digital Public Service",
+        "Description": "Dispute Registry Management is an IT concept that involves the use of technology to manage, track, and resolve disputes. It is commonly used in industries such as finance, e-commerce, and telecommunications where disputes can arise frequently.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/TributaryJusticeManagementCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/DisputeManagementBusinessService",
+        "Policy": "Taxes",
+        "Name": "Dispute management Digital Public Service",
+        "Description": "Dispute Management is an IT concept that involves the use of technology to handle and resolve disputes or conflicts that arise in business transactions. It includes tracking, managing, and resolving disputes effectively and efficiently.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/TributaryJusticeManagementCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/TributaryJusticeCaseManagementBusinessService",
+        "Policy": "Taxes",
+        "Name": "Tributary justice case management Digital Public Service",
+        "Description": "Tributary Justice Case Management is an IT concept that refers to the use of technology, specifically software systems, to manage legal cases in a tributary justice system. It involves the organization, tracking, and analysis of case data to improve efficiency and effectiveness in the justice system.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/TributaryJusticeManagementCapability"
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/TaxClaimsManagementBusinessService",
+        "Policy": "Taxes",
+        "Name": "Tax claims management Digital Public Service",
+        "Description": "Tax Claims Management is an IT concept that involves the use of software or systems to manage, track, and optimize tax claims processes. It helps businesses to accurately calculate their tax liabilities, ensure compliance with tax laws, and efficiently manage tax-related data.",
+        "Digital_Business_Capability": [
+            "http://data.europa.eu/dr8/egovera/TributaryJusticeManagementCapability"
         ]
     }
 ]

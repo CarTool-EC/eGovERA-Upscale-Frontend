@@ -10,7 +10,7 @@
                 <div class="col-3">
                     <div id="dps-network-info">
                         <div>
-                            <div class="eui-u-font-bold" style="margin-bottom: 0.5rem;">
+                            <div class="eui-u-f-bold" style="margin-bottom: 0.5rem;">
                                 Selected Digital Business Capability:
                             </div>
                             <div id="dps-network-bc-info">
@@ -27,11 +27,11 @@
                         </div>
                         <hr class="eui-u-mt-s, eui-u-mb-s" />
                         <form [formGroup]="relatedDPSForm" *ngIf="relatedDPSForm != null">
-                            <div class="eui-u-mt-s eui-u-mb-s eui-u-font-bold">
+                            <div class="eui-u-mt-s eui-u-mb-s eui-u-f-bold">
                                 Digital Public Services in scope:
                             </div>
                             <div class="dps-select-div mt-2" id="dps-select-info">
-                                <div *ngFor="let dps of DBC.RelatedDPSs" class="eui-u-display-flex eui-u-mb-s">
+                                <div *ngFor="let dps of DBC?.RelatedDPSs" class="eui-u-display-flex eui-u-mb-s">
                                     <input id="id-{{dps.Puri}}" formControlName="dpsForm-{{dps.Puri}}"
                                         (change)="onCheckboxClick(dps)" euiInputCheckBox />
                                     <label for="id-{{dps.Puri}}" euiLabel class="eui-u-font-s">
@@ -59,7 +59,7 @@
                 <div class="col-3">
                     <div id="view-network-info">
                         <div>
-                            <div style="margin-bottom: 0.5rem;" class="eui-u-font-bold">
+                            <div style="margin-bottom: 0.5rem;" class="eui-u-f-bold">
                                 Selected Digital Business Capability:
                             </div>
                             <div id="view-network-bc-info">
@@ -76,99 +76,64 @@
                         </div>
                         <hr class="eui-u-mt-s, eui-u-mb-s" />
                         <form [formGroup]="orientationForm">
-                            <div class="eui-u-mt-s eui-u-mb-s eui-u-font-bold">
+                            <div class="eui-u-mt-s eui-u-mb-s eui-u-f-bold">
                                 Implementation orientation for the digital transformation:
                             </div>
-                            <div>
-                                <ul>
-                                    <li style="width: 90%;">
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <span class="eui-u-font-bold">
-                                                    View
-                                                </span>
-                                            </div>
-                                            <div class="col-6 eui-u-text-center">
-                                                <span class="eui-u-font-bold eui-u-cursor-help" euiTooltip="Click the arrows to change the implementation orientation. For a suggested implementation click the link below">
-                                                    Order selection
-                                                    <eui-icon-svg icon="eui-question-circle" set="eui" size="xs" fillColor="grey-100"></eui-icon-svg>
-                                                </span>
-                                            </div>
-                                            <hr class="eui-u-mt-s"/>
-                                        </div>
-                                    </li>
-                                    <li *ngFor="let view of viewList; index as i" style="width: 90%;">
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <span>{{ view.name }}</span>
-                                            </div>
-                                            <div class="col-6 eui-u-text-center">
-                                                <span>
-                                                    <button 
-                                                        [euiDisabled]="isFirst(view)"
-                                                        euiButton 
-                                                        euiIconButton 
-                                                        euiBasicButton 
-                                                        euiSizeXS 
-                                                        (click)="onOrientationClick(view, true)">
-                                                        <eui-icon-svg icon="eui-arrow-up"></eui-icon-svg>
-                                                    </button>
-                                                </span>
-                                                <span>
-                                                    <button 
-                                                        [euiDisabled]="isLast(view)"
-                                                        euiButton 
-                                                        euiIconButton 
-                                                        euiBasicButton 
-                                                        euiSizeXS 
-                                                        (click)="onOrientationClick(view, false)">
-                                                        <eui-icon-svg icon="eui-arrow-down"></eui-icon-svg>
-                                                    </button>
-                                                </span>
-                                            </div>
-                                            <hr />
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- <mat-radio-group formControlName="orientation" (change)="onOrientationClick()">
+                            <mat-radio-group formControlName="orientation" (change)="onOrientationClick()">
                                 <div>
-                                    <mat-radio-button [value]="1">
+                                    <mat-radio-button [value]="2">
                                         <div class="eui-u-font-s">
                                             Legal
                                         </div>
                                     </mat-radio-button>
                                 </div>
                                 <div>
-                                    <mat-radio-button [value]="2">
+                                    <mat-radio-button [value]="3">
                                         <div class="eui-u-font-s">
                                             Organisational
                                         </div>
                                     </mat-radio-button>
                                 </div>
                                 <div>
-                                    <mat-radio-button [value]="3">
+                                    <mat-radio-button [value]="4">
                                         <div class="eui-u-font-s">
                                             Semantic
                                         </div>
                                     </mat-radio-button>
                                 </div>
                                 <div>
-                                    <mat-radio-button [value]="4">
+                                    <mat-radio-button [value]="5">
                                         <div class="eui-u-font-s">
-                                            Technical
+                                            Technical Application
                                         </div>
                                     </mat-radio-button>
                                 </div>
-                            </mat-radio-group> -->
+                                <div>
+                                    <mat-radio-button [value]="6">
+                                        <div class="eui-u-font-s">
+                                            Technical Infrastructure
+                                        </div>
+                                    </mat-radio-button>
+                                </div>
+                            </mat-radio-group>
                         </form>
+                        <div class="eui-u-mt-s eui-u-mb-s">
+                            <button 
+                                euiButton 
+                                euiPrimary
+                                euiSizeXS 
+                                [euiDisabled]="startingViewId == null" 
+                                (click)="onOrientationClick()">
+                                Edit current orientation
+                            </button>
+                        </div>
                         <div>
-                            <div class="eui-u-mt-s eui-u-mb-s eui-u-font-bold">
-                                For a suggested implementation click <a href="https://idpsio-test.herokuapp.com/" target="_blank">here</a>
+                            <div class="eui-u-mt-s eui-u-mb-s eui-u-f-bold">
+                                For a suggested implementation orientation (Start) click <a href="https://idpsio-test.herokuapp.com/" target="_blank">here</a>
                             </div>
                         </div>
-                        <!-- <hr class="eui-u-mt-s, eui-u-mb-s" />
-                        <div class="row eui-u-mt-xl">
+                        <hr class="eui-u-mt-s, eui-u-mb-s" />
+                        <div class="row eui-u-mt-xl" *ngIf="showBusinessAgnosticNodes">
                             <div class="col-9">
                                 Show business agnostic nodes
                             </div>
@@ -176,7 +141,7 @@
                                 <eui-slide-toggle isChecked (slideToggleChange)="onSlideToggleChange($event)">
                                 </eui-slide-toggle>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
                 <div class="col-9 adjust-heights">
@@ -196,7 +161,7 @@
                 <div class="col-3">
                     <div id="abb-network-info">
                         <div>
-                            <div style="margin-bottom: 0.5rem;" class="eui-u-font-bold">
+                            <div style="margin-bottom: 0.5rem;" class="eui-u-f-bold">
                                 Selected Digital Business Capability:
                             </div>
                             <div id="abb-network-bc-info">
@@ -213,7 +178,7 @@
                         </div>
                         <hr class="eui-u-mt-s, eui-u-mb-s" />
                         <div>
-                            <div class="eui-u-mt-s eui-u-mb-s eui-u-font-bold">
+                            <div class="eui-u-mt-s eui-u-mb-s eui-u-f-bold">
                                 Selected Digital Public Service<span *ngIf="selectedDPSList.length > 1">s</span>:
                             </div>
                             <div>
@@ -228,7 +193,7 @@
                         </div>
                         <hr class="eui-u-mt-s, eui-u-mb-s" />
                         <div>
-                            <div class="eui-u-mt-s eui-u-mb-s eui-u-font-bold">
+                            <div class="eui-u-mt-s eui-u-mb-s eui-u-f-bold">
                                 Selected view:
                             </div>
                             <div class="eui-u-mb-xs">
@@ -240,7 +205,7 @@
                         </div>
                         <hr class="eui-u-mt-s, eui-u-mb-s" />
                         <div>
-                            <div class="eui-u-mt-s eui-u-mb-s eui-u-font-bold">
+                            <div class="eui-u-mt-s eui-u-mb-s eui-u-f-bold">
                                 Selected Architecture Building Block:
                             </div>
                             <div *ngIf="selectedABB != null">
@@ -276,12 +241,12 @@
                     [rows]="abbList">
                     <ng-template euiTemplate="header">
                         <tr>
-                            <th class="eui-u-text-center">Name</th>
-                            <th class="eui-u-text-center">View</th>
-                            <th class="eui-u-text-center">Description</th>
-                            <th class="eui-u-text-center" width="50">Related DBC</th>
-                            <th class="eui-u-text-center" width="50">Related DPS</th>
-                            <th class="eui-u-text-center" width="50">Successors</th>
+                            <th class="eui-u-text-center eui-u-bg-color-info-100">Name</th>
+                            <th class="eui-u-text-center eui-u-bg-color-info-100">View</th>
+                            <th class="eui-u-text-center eui-u-bg-color-info-100">Description</th>
+                            <th class="eui-u-text-center eui-u-bg-color-info-100" width="50">Related DBC</th>
+                            <th class="eui-u-text-center eui-u-bg-color-info-100" width="50">Related DPS</th>
+                            <th class="eui-u-text-center eui-u-bg-color-info-100" width="50">Successors</th>
                         </tr>
                     </ng-template>
                     <ng-template let-row euiTemplate="body">
@@ -319,3 +284,85 @@
         </div>
     </eui-card-content>
 </eui-card>
+
+<eui-dialog
+    #orientationDialog
+    hasNoBodyPadding
+    [title]="'Implementation Orientation'"
+    [hasAcceptButton]="false"
+    [hasDismissButton]="false"
+    [hasCloseButton]="false"
+    [hasClosedOnEscape]="false"
+    [hasClosedOnClickOutside]="false">
+    <eui-dialog-header>
+        Click on the table cells to select the implementation roadmap. Each cells indicated which node will be the predecessor (rows) and which node will be the successor (columns): 
+    </eui-dialog-header>
+    <table euiTable [rows]="viewList" style="width: 100%;">
+        <ng-template euiTemplate="header">
+            <tr>
+                <th class="eui-u-bg-color-white"></th>
+                <th class="cell-border eui-u-text-center eui-u-bg-color-info-100" colspan="5">Successor nodes</th>
+            </tr>
+            <tr>
+                <th class="cell-border eui-u-text-center eui-u-bg-color-info-100" width="150">Predecessor nodes</th>
+                <th class="cell-border eui-u-text-center eui-u-bg-color-info-100" width="150" *ngFor="let view of viewList">
+                    {{ view.name }}
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template let-row euiTemplate="body">
+            <tr>
+                <td 
+                    class="cell-border eui-u-text-center eui-u-bg-color-info-100"
+                    [ngClass]="{'eui-u-f-bold': startingViewId === row.id}"
+                    height="100">
+                    {{ row.name }} {{(startingViewId === row.id) ? '(Start)' : ''}}
+                </td>
+                <td 
+                    class="cell-border" 
+                    (click)="onOrientationCellClick(row.id, 2)"
+                    [ngClass]="getCellColor(row.id, 2)">
+                </td>
+                <td 
+                    class="cell-border" 
+                    (click)="onOrientationCellClick(row.id, 3)"
+                    [ngClass]="getCellColor(row.id, 3)">
+                </td>
+                <td 
+                    class="cell-border" 
+                    (click)="onOrientationCellClick(row.id, 4)"
+                    [ngClass]="getCellColor(row.id, 4)">
+                </td>
+                <td 
+                    class="cell-border" 
+                    (click)="onOrientationCellClick(row.id, 5)"
+                    [ngClass]="getCellColor(row.id, 5)">
+                </td>
+                <td 
+                    class="cell-border" 
+                    (click)="onOrientationCellClick(row.id, 6)"
+                    [ngClass]="getCellColor(row.id, 6)">
+                </td>
+            </tr>
+        </ng-template>
+    </table>
+    <eui-dialog-footer>
+        <div class="eui-u-flex eui-u-flex-justify-content-end eui-u-flex-wrap">
+            <button
+                euiButton
+                euiDanger
+                class="eui-u-mr-s"
+                (click)="onDialogCancel()">
+                Cancel
+            </button>
+            <button
+                euiButton
+                euiSuccess
+                [euiDisabled]="!areNodesSelected()"
+                class="eui-u-mr-s"
+                (click)="onDialogConfirm()">
+                Confirm
+            </button>
+        </div>    
+    </eui-dialog-footer>
+</eui-dialog>

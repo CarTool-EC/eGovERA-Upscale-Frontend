@@ -6,7 +6,8 @@ import { Assessment } from '@shared/classes/Assessment.class';
 @Component({
   selector: 'app-export-pdf',
   templateUrl: './export-pdf.component.html',
-  styleUrl: './export-pdf.component.scss'
+  styleUrl: './export-pdf.component.scss',
+  standalone: false
 })
 export class ExportPdfComponent implements OnChanges {
   @Input('survey') survey: Assessment[];
@@ -20,7 +21,6 @@ export class ExportPdfComponent implements OnChanges {
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.downloadPDF != undefined && changes.downloadPDF.currentValue) {
-      console.log("Export PDF Changes: ", changes);
       // this.createPDF();
     }
   }
@@ -54,7 +54,7 @@ export class ExportPdfComponent implements OnChanges {
     pPDF.text(lSentence1, ...lSentence1Coords);
 
     // Add sentence2
-    const lSentence2 = "Unit.D2";
+    const lSentence2 = "Unit.B2";
     const lSentence2Coords = [93, 70];
     pPDF.text(lSentence2, ...lSentence2Coords);
 
@@ -120,7 +120,7 @@ export class ExportPdfComponent implements OnChanges {
     pPDF.text(lTopSentence, ...lTopSentenceCoords);
 
 
-    const lLeftSentence = "Copyright © European Commission 2022";
+    const lLeftSentence = "Copyright © European Commission 2025";
     const lLeftSentenceCoords = [10, 292]; // x, y
     pPDF.setTextColor(192, 192, 192);
     pPDF.setFontType("italic");

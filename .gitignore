@@ -8,6 +8,7 @@
 **/out-tsc
 **/tmp
 **/test/reports
+**/coverage
 
 # IDEs and editors
 /.idea
@@ -41,10 +42,14 @@ yarn-error.log
 
 # Angular specific
 .angular
+.nx
 
 # System Files
 .DS_Store
 Thumbs.db
 
 /assets/env-json-config.json
-/assets/openid-login-config.json
+
+node_modules/
+dist/
+yarn.lock

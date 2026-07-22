@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
@@ -8,11 +8,13 @@ import { Assessment } from '@shared/classes/Assessment.class';
 import { ArchitectureBuildingBlock } from '@shared/classes/ArchitectureBuildingBlock.class';
 import { DigitalPublicService } from '@shared/classes/DigitalPublicService.class';
 import { DigitalBusinessCapability } from '@shared/classes/DigitalBusinessCapability.class';
+import { EuiDialogComponent } from '@eui/components/eui-dialog';
 
 @Component({
   selector: 'app-portfolio-management',
   templateUrl: './portfolio-management.component.html',
-  styleUrl: './portfolio-management.component.scss'
+  styleUrl: './portfolio-management.component.scss',
+  standalone: false
 })
 export class PortfolioManagementComponent implements OnInit, OnChanges {
   @Input() survey: Assessment[];
@@ -20,6 +22,7 @@ export class PortfolioManagementComponent implements OnInit, OnChanges {
   @Input() requestPDFData: any;
   @Output('selectedDBC') selectedDBC: EventEmitter<any> = new EventEmitter()
   @Output('pdfData') pdfData: EventEmitter<any> = new EventEmitter();
+  @Output('closeDialog') closeDialog: EventEmitter<void> = new EventEmitter();
 
   public ABBs: ArchitectureBuildingBlock[] = [];
   public DPSs: DigitalPublicService[] = [];
@@ -104,7 +107,7 @@ export class PortfolioManagementComponent implements OnInit, OnChanges {
       EstimatedBudgetStart: new FormControl(1),
       EstimatedBudgetEnd: new FormControl(this.maxBudget),
       domainFilter: new FormControl(null),
-      xAxisFilter: new FormControl(null)
+      xAxisFilter: new FormControl('StrategicFit')
     });
 
     this.dataSource = [...this.survey]
@@ -242,9 +245,7 @@ export class PortfolioManagementComponent implements OnInit, OnChanges {
     this.ABBs = this.storageService.getABBs();
     this.DPSs = this.storageService.getDPSs();
     this.DBCs = this.storageService.getDBCs();
-    if (this.ABBs.length > 0 && this.DPSs.length > 0 && this.DBCs.length > 0) {
-      console.log('Loaded');
-    } else {
+    if (!(this.ABBs.length > 0 && this.DPSs.length > 0 && this.DBCs.length > 0)) {
       this.loadResources();
     }
   }
@@ -500,10 +501,12 @@ export class PortfolioManagementComponent implements OnInit, OnChanges {
             this.pdfData.emit(lPDF);
           } else {
             lPDF.save(this.PDFName);
+            this.closeDialog.emit();
           }
         });
       } else {
         lPDF.save(this.PDFName);
+        this.closeDialog.emit();
       }
     });
   }
@@ -520,7 +523,7 @@ export class PortfolioManagementComponent implements OnInit, OnChanges {
     pPDF.text(lSentence1, ...lSentence1Coords);
 
     // Add sentence2
-    const lSentence2 = "Unit.D2";
+    const lSentence2 = "Unit.B2";
     const lSentence2Coords = [93, 70];
     pPDF.text(lSentence2, ...lSentence2Coords);
 
@@ -586,7 +589,7 @@ export class PortfolioManagementComponent implements OnInit, OnChanges {
     pPDF.text(lTopSentence, ...lTopSentenceCoords);
 
 
-    const lLeftSentence = "Copyright © European Commission 2022";
+    const lLeftSentence = "Copyright © European Commission 2025";
     const lLeftSentenceCoords = [10, 292]; // x, y
     pPDF.setTextColor(192, 192, 192);
     pPDF.setFontType("italic");

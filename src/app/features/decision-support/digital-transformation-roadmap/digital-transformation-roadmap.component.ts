@@ -3,16 +3,20 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import html2canvas from 'html2canvas';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { EuiDialogComponent } from '@eui/components/eui-dialog';
 import { Network, DataSet } from 'vis';
 import { DigitalPublicService } from '@shared/classes/DigitalPublicService.class';
 import { ArchitectureBuildingBlock } from '@shared/classes/ArchitectureBuildingBlock.class';
 import { Assessment } from '@shared/classes/Assessment.class';
 import { StorageService } from '@shared/services/storage.service';
+import { parseColor } from 'html2canvas/dist/types/css/types/color';
+import { DigitalBusinessCapability } from '@shared/classes/DigitalBusinessCapability.class';
 
 @Component({
   selector: 'app-digital-transformation-roadmap',
   templateUrl: './digital-transformation-roadmap.component.html',
-  styleUrl: './digital-transformation-roadmap.component.scss'
+  styleUrl: './digital-transformation-roadmap.component.scss',
+  standalone: false
 })
 export class DigitalTransformationRoadmapComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() assessment: Assessment;
@@ -22,13 +26,21 @@ export class DigitalTransformationRoadmapComponent implements OnInit, AfterViewI
   @ViewChild('dpsNetwork') dpsNetwork: ElementRef;
   @ViewChild('viewNetwork') viewNetwork: ElementRef;
   @ViewChild('abbNetwork') abbNetwork: ElementRef;
+  @ViewChild('orientationDialog') orientationDialog: EuiDialogComponent;
 
   @Output('componentLoaded') componentLoaded: EventEmitter<boolean> = new EventEmitter();
+  @Output('closeDialog') closeDialog: EventEmitter<void> = new EventEmitter();
   public dpsNetworkInstance: Network;
   public viewNetworkInstance: Network;
   public abbNetworkInstance: Network;
 
   public viewList: { name: string, id: number }[] = [];
+  public startingViewId: number = null;
+  public numberOfSelectedNodes: number = 0;
+  public colorGrid: { 2: number[], 3: number[], 4: number[], 5: number[], 6: number[] } = { 2: [], 3: [], 4: [], 5: [], 6: [] };
+  public previousStartingViewId: number = null;
+  public previousNumberOfSelectedNodes: number = 0;
+  public previousColorGrid: { 2: number[], 3: number[], 4: number[], 5: number[], 6: number[] } = { 2: [], 3: [], 4: [], 5: [], 6: [] };
   public relatedDPSForm: FormGroup = null;
   public orientationForm: FormGroup = null;
   public selectedDPSList: DigitalPublicService[] = [];
@@ -37,7 +49,10 @@ export class DigitalTransformationRoadmapComponent implements OnInit, AfterViewI
   public abbList: ArchitectureBuildingBlock[] = [];
   public selectedABB: ArchitectureBuildingBlock = null;
 
+  public loading: boolean = false;
+
   public showAbbNetwork = false;
+  public showBusinessAgnosticNodes: boolean = false;
   public toogleInfra: boolean = true;
   public busOrientation: number = 1;
   public idBCdom = 1;
@@ -80,17 +95,17 @@ export class DigitalTransformationRoadmapComponent implements OnInit, AfterViewI
 
   ngOnInit(): void {
     this.loadReasources();
-    this.viewList = [{ name: "Legal", id: 2 }, { name: "Organisational", id: 3 }, { name: "Semantic", id: 4 }, { name: "Technical - Application", id: 5 }, { name: "Techincal - Infrastructure", id: 6 }];
+    this.viewList = [{ name: "Legal", id: 2 }, { name: "Organisational", id: 3 }, { name: "Semantic", id: 4 }, { name: "Technical Application", id: 5 }, { name: "Techincal Infrastructure", id: 6 }];
     this.orientationForm = new FormGroup({
-      orientation: new FormControl({ value: 1, disabled: false })
+      orientation: new FormControl({ value: null, disabled: false })
     });
     this.relatedDPSForm = this.buildForm(this.DBC.RelatedDPSs);
   }
 
   ngAfterViewInit(): void {
     this.drawDPSNetwork(this.DBC.RelatedDPSs);
-    this.drawViewNetwork(this.DBC);
-    this.networkEvent();
+    // this.drawViewNetwork(this.DBC);
+    // this.networkEvent();
     this.componentLoaded.emit(true);
   }
 
@@ -104,8 +119,12 @@ export class DigitalTransformationRoadmapComponent implements OnInit, AfterViewI
       this.relatedDPSForm = this.buildForm(changes.DBC.currentValue.RelatedDPSs);
       this.loadReasources();
       this.drawDPSNetwork(changes.DBC.currentValue.RelatedDPSs);
-      this.drawViewNetwork(changes.DBC.currentValue);
-      this.networkEvent();
+      
+      this.viewNetworkInstance.destroy();
+      this.orientationForm.reset();
+      this.startingViewId = null;
+      // this.drawViewNetwork(changes.DBC.currentValue);
+      // this.networkEvent();
     }
 
     if (changes.downloadPDF != undefined && !changes.downloadPDF.firstChange) {
@@ -361,32 +380,115 @@ export class DigitalTransformationRoadmapComponent implements OnInit, AfterViewI
                       }
                     });
                     lPDF.save(this.PDFName);
+                    this.closeDialog.emit();
                   } else {
                     lPDF.save(this.PDFName);
+                    this.closeDialog.emit();
                   }
                 } else {
                   lPDF.save(this.PDFName);
+                  this.closeDialog.emit();
                 }
               });
             } else {
               lPDF.save(this.PDFName);
+              this.closeDialog.emit();
             }
           } else {
             lPDF.save(this.PDFName);
+            this.closeDialog.emit();
           }
         });
       } else {
         lPDF.save(this.PDFName);
+        this.closeDialog.emit();
       }
     });
   }
 
-  // public onOrientationClick() {
-  //   this.busOrientation = this.orientationForm.value.orientation;
+  public onOrientationClick() {
+    if (this.startingViewId != null && this.startingViewId == this.orientationForm.value.orientation) {
+      this.orientationDialog.openDialog();
+    } else {
+      this.previousStartingViewId = this.startingViewId;
+      this.previousNumberOfSelectedNodes = this.numberOfSelectedNodes;
+      this.previousColorGrid = this.colorGrid;
 
-  //   this.drawViewNetwork(this.DBC);
-  //   this.networkEvent();
-  // }
+      this.startingViewId = this.orientationForm.value.orientation;
+      this.colorGrid = { 2: [], 3: [], 4: [], 5: [], 6: [] };
+      this.numberOfSelectedNodes = 0;
+      this.orientationDialog.openDialog();
+    }
+  }
+
+  public onOrientationCellClick(pRowId: number, pColumnId: number) {
+    if (pColumnId != this.startingViewId && pRowId != pColumnId) {
+      if (this.colorGrid[pRowId].length != 0 || this.numberOfSelectedNodes != 4) {
+        let lRowColorArray = this.colorGrid[pRowId];
+        if (lRowColorArray.includes(pColumnId)) {
+          lRowColorArray.splice(lRowColorArray.indexOf(pColumnId), 1);
+          if (lRowColorArray.length === 0) {
+            this.numberOfSelectedNodes = this.numberOfSelectedNodes - 1;
+          }
+        } else {
+          lRowColorArray.push(pColumnId);
+          if (lRowColorArray.length === 1) {
+            this.numberOfSelectedNodes = this.numberOfSelectedNodes + 1;
+          }
+        }
+      }
+    }
+  }
+
+  public getCellColor(pRowId: number, pColumnId: number): string {
+    if (pColumnId == this.startingViewId || pRowId == pColumnId || (this.colorGrid[pRowId].length === 0 && this.numberOfSelectedNodes === 4)) {
+      return 'eui-u-c-bg-neutral-lighter';
+    } else if (this.colorGrid[pRowId].includes(pColumnId)) {
+      return 'eui-u-c-bg-success-light';
+    } else if (this.colorGrid[pColumnId].includes(pRowId)) {
+      return 'eui-u-c-bg-neutral-lighter';
+    } else {
+      return 'eui-u-c-bg-white';
+    }
+  }
+
+  public onDialogCancel() {
+    this.startingViewId = this.previousStartingViewId;
+    this.numberOfSelectedNodes = this.previousNumberOfSelectedNodes;
+    this.colorGrid = this.previousColorGrid;
+    this.orientationForm.value.orientation = this.startingViewId;
+    this.orientationDialog.closeDialog();
+  }
+
+  public onDialogConfirm() {
+    this.showBusinessAgnosticNodes = true;
+    this.drawViewNetwork(this.DBC);
+    this.networkEvent();
+    this.orientationDialog.closeDialog();
+  }
+
+  public areNodesSelected(): boolean {
+    let targetNodeList: number[] = [];
+    let sourceNodeList: number[] = [];
+
+    for (let i = 2; i < 7; i++) {
+      let row: number[] = this.colorGrid[i];
+      if (row.length != 0) {
+        sourceNodeList.push(i);
+        row.forEach((element: number) => {
+          if (!targetNodeList.includes(element)) {
+            targetNodeList.push(element);
+          }
+        });
+      }
+    }
+
+    return targetNodeList.length === 4 && sourceNodeList.length === 4;
+  }
+
+  public isConfigurationCorrect(): boolean {
+    return true;
+  }
 
   public onCheckboxClick(DPS: DigitalPublicService) {
     let checkboxValue: boolean = this.relatedDPSForm.value["dpsForm-" + DPS.Puri];
@@ -398,9 +500,11 @@ export class DigitalTransformationRoadmapComponent implements OnInit, AfterViewI
 
     if (this.selectedDPSList.length > 0) {
       this.drawDPSNetwork(this.selectedDPSList);
-      this.drawViewNetwork(this.DBC);
     } else {
       this.drawDPSNetwork(this.DBC.RelatedDPSs);
+    }
+    
+    if (this.previousStartingViewId != null) {
       this.drawViewNetwork(this.DBC);
     }
     this.networkEvent();
@@ -410,27 +514,6 @@ export class DigitalTransformationRoadmapComponent implements OnInit, AfterViewI
     this.toogleInfra = event;
     this.drawViewNetwork(this.DBC);
     this.networkEvent();
-  }
-
-  public isFirst(lView: { name: string, id: number }): boolean {
-    return this.viewList.indexOf(lView) === 0;
-  }
-
-  public isLast(lView: { name: string, id: number }): boolean {
-    return this.viewList.indexOf(lView) === this.viewList.length - 1;
-  }
-
-  public onOrientationClick(lView: { name: string, id: number }, isPositionIncreased: boolean): void {
-    let lIndex: number = this.viewList.indexOf(lView);
-    this.viewList.splice(lIndex, 1);
-
-    if (isPositionIncreased) {
-      this.viewList.splice(lIndex - 1, 0, lView);
-    } else {
-      this.viewList.splice(lIndex + 1, 0, lView);
-    }
-
-    this.drawViewNetwork(this.DBC);
   }
 
   private buildForm(pInput: any[]) {
@@ -511,8 +594,16 @@ export class DigitalTransformationRoadmapComponent implements OnInit, AfterViewI
       this.viewNetworkInstance = null;
     }
 
-    this.toogleInfra = false;
+    if (dbc.Policy == 'Business Agnostic') {
+      this.toogleInfra = false;
+    }
+
     let showNonInfra = true;
+
+    if (this.selectedDPSList.length > 0 && this.selectedDPSList.every((dps: DigitalPublicService) => dps.Policy === "Business Agnostic")) {
+      showNonInfra = false;
+      this.toogleInfra = true;
+    }
 
     let nodes = [];
     let color = { background: "#fff" };
@@ -580,17 +671,20 @@ export class DigitalTransformationRoadmapComponent implements OnInit, AfterViewI
         let title;
         if (view.Abbs.length == 0) {
           // title = labelInit + "- Business Agnostic";
-          title = view.Name;
+          title = view.Name + " - " + view.Policy;
           label = `<div>
           <div>${view.Name}</div>
+          <div>${view.Policy}</div>
           </div>`;
         } else {
           let viewSupportAbility = this.assessment.View[view.Name] ? this.assessment.View[view.Name].SupportAbility : "1";
 
           // title = labelInit + " - " + dbc.Policy + " - " + parseFloat(viewSupportAbility).toFixed(2) + " out of 5";
-          title = view.Name + " - " + Math.round(viewSupportAbility) + " out of 5";
+          // title = view.Name + " - " + Math.round(viewSupportAbility) + " out of 5";
+          title = view.Name + " - " + view.Policy;
           label = `<div>
           <div>${view.Name}</div>
+          <div>${view.Policy}</div>
           <div>Support Ability: ${Math.round(viewSupportAbility)} out of 5</div>
           </div>`;
         }
@@ -611,31 +705,31 @@ export class DigitalTransformationRoadmapComponent implements OnInit, AfterViewI
           case "Legal": {
             image = "legal.png";
             id = this.idLinf;
-            labelInit = "L";
+            labelInit = "Legal";
             break;
           }
           case "Organisational": {
             image = "org.png";
             id = this.idOinf;
-            labelInit = "O";
+            labelInit = "Organisational";
             break;
           }
           case "Semantic": {
             image = "data.png";
             id = this.idSinf;
-            labelInit = "S";
+            labelInit = "Semantic";
             break;
           }
           case "Technical Application": {
             image = "TA.png";
             id = this.idTAinf;
-            labelInit = "TA";
+            labelInit = "Technical Application";
             break;
           }
           case "Technical Infrastructure": {
             image = "tech.png";
             id = this.idTIinf;
-            labelInit = "TI";
+            labelInit = "Technical Infrastructure";
             break;
           }
           default: {
@@ -767,7 +861,7 @@ export class DigitalTransformationRoadmapComponent implements OnInit, AfterViewI
 
       lNodes.push(lABBNode);
 
-      lABB.Successors.forEach((lSuccessor: string) => {
+      lABB.Successors?.forEach((lSuccessor: string) => {
         lEdges.push({ from: lABB.Puri, to: lSuccessor });
       });
     });
@@ -856,17 +950,48 @@ export class DigitalTransformationRoadmapComponent implements OnInit, AfterViewI
 
   private resolveNetworkEdges(bcNode: any, startNode: any, showNonInfra: boolean) {
     let edges = new DataSet<any>([]);
-    this.viewList.forEach((currentValue: { name: string, id: number }, index: number) => {
-      if (index === 0) {
-        edges.add({ from: startNode.id, to: currentValue.id, dashes: false });
-      } else {
-        edges.add({ from: this.viewList[index - 1].id, to: currentValue.id, dashes: false });
-      }
 
-      if (index === this.viewList.length - 1) {
-        edges.add({ from: currentValue.id, to: bcNode.id, dashes: false });
-      }
-    });
+    let startingNode: number = null;
+    if (showNonInfra) {
+      startingNode = this.toogleInfra ? this.startingViewId + 5 : this.startingViewId;
+      this.viewList.forEach((currentValue: { name: string, id: number }, index: number) => {
+        if (currentValue.id === this.startingViewId) {
+          edges.add({ from: startNode.id, to: startingNode, dashes: true });
+        }
+  
+        if (this.colorGrid[currentValue.id].length === 0) {
+          edges.add({ from: currentValue.id, to: bcNode.id, dashes: true });
+        } else {
+          this.colorGrid[currentValue.id].forEach((lTargetId: number) => {
+            edges.add({ from: currentValue.id, to: lTargetId, dashes: false });
+          });
+        }
+        if (this.toogleInfra) {
+          edges.add({ from: currentValue.id + 5, to: currentValue.id, dashes: true });
+          if (this.colorGrid[currentValue.id].length != 0) {
+            this.colorGrid[currentValue.id].forEach((lTargetId: number) => {
+              edges.add({ from: currentValue.id + 5, to: lTargetId + 5, dashes: false });
+            });
+          }
+        }
+      });
+    } else {
+      startingNode = this.startingViewId + 5;
+
+      this.viewList.forEach((currentValue: { name: string, id: number }, index: number) => {
+        if (currentValue.id === this.startingViewId) {
+          edges.add({ from: startNode.id, to: startingNode, dashes: true });
+        }
+  
+        if (this.colorGrid[currentValue.id].length === 0) {
+          edges.add({ from: currentValue.id + 5, to: bcNode.id, dashes: true });
+        } else {
+          this.colorGrid[currentValue.id].forEach((lTargetId: number) => {
+            edges.add({ from: currentValue.id + 5, to: lTargetId + 5, dashes: false });
+          });
+        }
+      });
+    }
 
     return edges;
   }
@@ -887,6 +1012,26 @@ export class DigitalTransformationRoadmapComponent implements OnInit, AfterViewI
   private loadReasources() {
     this.ABBs = this.storageService.getABBs().filter((lABB: ArchitectureBuildingBlock) => lABB.RelatedDBCs.includes(this.DBC.Puri));
     this.abbList = this.ABBs;
+    const dbcs = this.storageService.getDBCs();
+    const adhocDBCS = this.storageService.getAllAdHocDBCs();
+    const adhocValues = Array.from(adhocDBCS.values()).flat();
+
+    if (!dbcs.find(dbc => this.DBC.Puri == dbc.Puri)) {
+      const foundDBC = adhocValues.find(adhoc => this.DBC?.Puri === adhoc.Puri);
+      const purisToSearch = foundDBC.RelatedDPSs
+      const dpss: DigitalPublicService[] = [];
+      const adhocDPS = this.storageService.getAllAdHocDPSs();
+      const adhocDPsValues = Array.from(adhocDPS.values()).flat();
+
+      purisToSearch.forEach(puri => {
+        const dps = adhocDPsValues.find(adhocdps => puri == adhocdps.Puri)
+        if (dps) {
+          dpss.push(dps);
+        }
+      })
+
+      this.DBC.RelatedDPSs = dpss;
+    }
   }
 
   public prettyfyUri(uri) {
@@ -923,7 +1068,7 @@ export class DigitalTransformationRoadmapComponent implements OnInit, AfterViewI
     pPDF.text(lTopSentence, ...lTopSentenceCoords);
 
 
-    const lLeftSentence = "Copyright © European Commission 2022";
+    const lLeftSentence = "Copyright © European Commission 2025";
     const lLeftSentenceCoords = [10, 292]; // x, y
     pPDF.setTextColor(192, 192, 192);
     pPDF.setFontType("italic");

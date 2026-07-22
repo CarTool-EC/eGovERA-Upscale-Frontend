@@ -1,30 +1,16 @@
-# Use a NodeJS base image
-FROM node:18-alpine
-
-# Install yarn and eUI
-RUN npm install -g @eui/cli@17.2.3
-
-# Zscaler fix
-COPY cacert.pem /etc/ssl/certs/cacert.pem
-RUN yarn config set cafile /etc/ssl/certs/cacert.pem
-RUN yarn config list
-
-# Set working directory
-WORKDIR /upscale-frontend
-
-# Copy package and npmrc files
+# Stage 1: Build the Angular app
+FROM node:22.21.1-alpine AS build
+WORKDIR /app
+COPY package*.json ./
 COPY yarn.lock ./
-COPY package.json ./
+RUN yarn install --frozen-lockfile
+COPY . .
+RUN npx ng build --configuration production
 
-# Install and update packages
-RUN yarn install
+# Stage 2: Serve with Nginx
+FROM nginx:stable-alpine
+COPY nginx_default.conf.template /etc/nginx/templates/default.conf.template
+COPY --from=build /app/dist/browser /usr/share/nginx/html
 
-# After installing packages, copy all app files
-COPY ./ ./
-
-#It can be modified in Angular.json
-EXPOSE 4200
-
-# Execute command
-CMD ["npm", "run", "prod"]
-
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

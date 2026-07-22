@@ -4,24 +4,30 @@ import { Assessment } from '@shared/classes/Assessment.class';
 import { EuiDialogComponent } from '@eui/components/eui-dialog';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { StorageService } from '@shared/services/storage.service';
+import { ModelDigitalBusinessCapability } from '@shared/classes/ModelDigitalBusinessCapability.class';
 
 @Component({
   selector: 'app-capability-assessment',
   templateUrl: './capability-assessment.component.html',
-  styleUrl: './capability-assessment.component.scss'
+  styleUrl: './capability-assessment.component.scss',
+  standalone: false
 })
 export class CapabilityAssessmentComponent implements OnInit {
   @ViewChild('dbcDialog') dbcDialog: EuiDialogComponent;
   @ViewChild('instructionsDialog') instructionsDialog: EuiDialogComponent;
+  @ViewChild('nameFileDialog') nameFileDialog: EuiDialogComponent;
+  @ViewChild('saveSurveyDialog') saveSurveyDialog: EuiDialogComponent;
 
   @Input() selectedDomains: {id: string, value: string}[];
   @Input() previouslySelectedDBCs: {businessAgnostic: DigitalBusinessCapability[], customs: DigitalBusinessCapability[], health: DigitalBusinessCapability[], taxes: DigitalBusinessCapability[]} = {businessAgnostic: [], customs: [], health: [], taxes: []};
   @Input() assessments: Assessment[];
-
+  @Input() modelDBCs: {businessAgnostic: ModelDigitalBusinessCapability[], customs: ModelDigitalBusinessCapability[], health: ModelDigitalBusinessCapability[], taxes: ModelDigitalBusinessCapability[]};
+  
   @Output() capabilityAssessment: EventEmitter<{selectedDBCs: {businessAgnostic: DigitalBusinessCapability[], customs: DigitalBusinessCapability[], health: DigitalBusinessCapability[], taxes: DigitalBusinessCapability[]}, assessments: Assessment[]}> = new EventEmitter();
-  @Output() pauseAssessment: EventEmitter<Assessment[]> = new EventEmitter();
+  @Output() pauseAssessment: EventEmitter<void> = new EventEmitter();
+  @Output() downloadAssessment: EventEmitter<{filename: string, assessments: Assessment[]}> = new EventEmitter();
   @Output() returnToStart: EventEmitter<boolean> = new EventEmitter();
-
+  
   public DBCs: {businessAgnostic: DigitalBusinessCapability[], customs: DigitalBusinessCapability[], health: DigitalBusinessCapability[], taxes: DigitalBusinessCapability[]};
 
   public currentDomain: string;
@@ -33,10 +39,9 @@ export class CapabilityAssessmentComponent implements OnInit {
   public selectedAssessment: Assessment = null;
   public assessmentList: Assessment[] = [];
 
-  // public loading: boolean = true;
-
   public ratingOptions: number[] = [1, 2, 3, 4, 5];
   public strategicFitForm: FormGroup;
+  public filename: FormGroup;
 
   constructor(
     private storageService: StorageService,
@@ -45,8 +50,14 @@ export class CapabilityAssessmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentDomain = this.selectedDomains[0].id;
-    this.strategicFitForm = this.fb.group({
-      strategicFit: new FormControl({ value: null, disabled: false })
+    // this.strategicFitForm = this.fb.group({
+    //   strategicFit: new FormControl({ value: null, disabled: false })
+    // });
+    this.strategicFitForm = new FormGroup({
+      strategicFit: new FormControl({value: null, disabled: false})
+    });
+    this.filename = this.fb.group({
+      filename: new FormControl({value: null, disabled: false}, [Validators.required])
     });
     if (this.assessments != null) {
       this.selectedDBCs = this.previouslySelectedDBCs;
@@ -55,8 +66,34 @@ export class CapabilityAssessmentComponent implements OnInit {
     this.loadDigitalBusinessCapabilities();
   }
 
+  public downloadSurvey(): void {
+    console.log(this.filename.value.filename);
+    let lDownloadAssessment: {filename: string, assessments: Assessment[]} = {filename: this.filename.value.filename, assessments: this.assessmentList };
+    this.downloadAssessment.emit(lDownloadAssessment);
+  }
+
   public onSaveSurveyClick(): void {
-    this.pauseAssessment.emit(this.assessmentList);
+    this.nameFileDialog.openDialog();
+  }
+
+  public onContinueClick(): void {
+    this.downloadSurvey();
+    this.nameFileDialog.closeDialog();
+    this.saveSurveyDialog.openDialog();
+  }
+
+  public onCancelClick(): void {
+    this.filename.reset();
+    this.nameFileDialog.closeDialog();
+  }
+
+  public onReturnToFormClick(): void {
+    this.saveSurveyDialog.closeDialog();
+    this.pauseAssessment.emit();
+  }
+
+  public onContinueAssessmentClick(): void {
+    this.saveSurveyDialog.closeDialog();
   }
 
   public onDbcCardClick(pClickedDbc: DigitalBusinessCapability): void {
@@ -66,7 +103,7 @@ export class CapabilityAssessmentComponent implements OnInit {
       this.selectedAssessment = this.assessmentList.filter((assessment: Assessment) => assessment.Puri === this.selectedDBC.Puri)[0];
       this.strategicFitForm.get('strategicFit').setValue(this.selectedAssessment.StrategicFit);
     } else {
-      this.strategicFitForm.get('strategicFit').setValue(null);
+      this.strategicFitForm.reset();
     }
 
     this.dbcDialog.openDialog();
@@ -125,7 +162,6 @@ export class CapabilityAssessmentComponent implements OnInit {
       selectedDBCs: this.selectedDBCs, 
       assessments: this.assessmentList
     }
-
     this.capabilityAssessment.emit(capabilityAssessment);
   }
 
@@ -140,5 +176,10 @@ export class CapabilityAssessmentComponent implements OnInit {
   private loadDigitalBusinessCapabilities() {
     this.DBCs = this.storageService.getFilteredDBCs();
     this.currentDomainDBCs = this.DBCs[this.currentDomain];
+  }
+
+  shouldDisplayModelName(list: any[], index: number): boolean {
+    if (index === 0) return true;
+    return list[index].modelName !== list[index - 1].modelName;
   }
 }

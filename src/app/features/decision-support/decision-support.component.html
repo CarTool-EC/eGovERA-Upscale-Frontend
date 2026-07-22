@@ -10,22 +10,39 @@
             <button 
                 euiButton 
                 euiPrimary
+                [euiDisabled]="loading"
                 (click)="surveyInput.click()">
-                Load survey
+                {{loading ? "Loading..." : "Load survey"}}
             </button>
             <button
                 euiButton
                 euiSecondary
-                [euiDisabled]="loadedSurvey.length === 0"
+                [euiDisabled]="disableExport"
                 (click)="onExportClick()">
-                Export as PDF
+                {{loading ? "Loading..." : "Export as PDF"}}
             </button>
         </eui-page-header-action-items>
     </eui-page-header>
     <eui-page-content>
         <eui-card *ngIf="loadedSurvey.length === 0">
             <eui-card-content>
-                Please upload an assessment survey to continue
+                <div class="eui-u-flex eui-u-flex-wrap">
+                    <div class="row">
+                        <div class="col">
+                            Welcome to the Digital Business Capability Portfolio Management Decision Support. In this page you will be able to visualize the data from the assessment performed in the <a href="/building-and-assessment" target="_blank" class="eui-u-text-link-external">Digital Business Capability Building and Assessment</a>, as well as edit existing values to see how that affects the overall scores.
+                        </div>
+                    </div>
+                    <div class="row eui-u-mt-m">
+                        <div class="col">
+                            Additionally, in this page you will be able to create a roadmap for DBC implementation by clicking on the bubbles in the left-most graph.
+                        </div>
+                    </div>
+                    <div class="row eui-u-mt-m">
+                        <div class="col">
+                            Please upload an assessment survey using the button at the top right corner to continue.
+                        </div>
+                    </div>
+                </div>
             </eui-card-content>
         </eui-card>
         <app-portfolio-management 
@@ -35,7 +52,8 @@
             [contactInfo]="contactInfo"
             [requestPDFData]="requestDataFromPortfolioManagement"
             (selectedDBC)="onDBCSelection($event)"
-            (pdfData)="portfolioManagementPDFData($event)">
+            (pdfData)="portfolioManagementPDFData($event)"
+            (closeDialog)="closeDownloadDialog()">
         </app-portfolio-management>
         <app-digital-transformation-roadmap
             id="transformation-roadmap"
@@ -44,14 +62,28 @@
             [assessment]="selectedAssessment"
             [DBC]="selectedDBC"
             [downloadPDF]="downloadPDF"
-            (componentLoaded)="onRoadmapLoad($event)">
+            (componentLoaded)="onRoadmapLoad($event)"
+            (closeDialog)="closeDownloadDialog()">
         </app-digital-transformation-roadmap>
-        <!-- <app-export-pdf
-            *ngIf="showExport"
-            [survey]="loadedSurvey"
-            [downloadPDF]="downloadPDF"
-            [contactInfo]="contactInfo"
-            [portfolioManagementData]="portfolioManagementData">
-        </app-export-pdf> -->
     </eui-page-content>
 </eui-page>
+<eui-dialog
+    #downloadPDFDialog
+    [title]="'Download PDF'"
+    [hasAcceptButton]="false"
+    [hasDismissButton]="false"
+    [hasCloseButton]="false"
+    [hasClosedOnEscape]="false"
+    [hasClosedOnClickOutside]="false">
+    <div class="row">
+        <div class="col">
+            The application is preparing the PDF for download, please wait a moment
+        </div>
+    </div>
+    <div class="row">
+        <div class="col eui-u-flex eui-u-flex-justify-content-center">
+            <eui-block-content role="presentation" ariaLabel="Nested block" [isBlocked]="downloadInProgress">
+            </eui-block-content>
+        </div>
+    </div>
+</eui-dialog>

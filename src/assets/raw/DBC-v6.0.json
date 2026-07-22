@@ -16,7 +16,7 @@
         "ID": "http://data.europa.eu/dr8/egovera/ArtificialIntelligenceCapability",
         "Policy": "Business Agnostic",
         "Name": "Artificial Intelligence ",
-        "Description": "Artificial Intelligence includes different topics: \r\n- Big Data Analysis enables organisations to analyse high-volume, high-velocity and/or high-variety information and data enabling enhanced insight, a more effective decision making, and process automation. \r\n- Data mining enables organisations to discover meaningful correlations and connections, patterns and trends by considering large amounts of data stored in databases and repositories. Data mining, as a fundamental pillar for Artificial Intelligence, employs pattern recognition technologies, as well as statistical and mathematical techniques.\r\n- Natural language processing (NLP) enables organisations to build machines that understand and respond to text or voice data—and respond with text or speech of their own—in much the same way humans do. By means of the parsing and semantic interpretation of text or voice data, it allows machines to learn, analyse, and understand human language.\r\n- Machine learning enables organisations to build applications learning from data and improving their accuracy over time without being programmed to do so.",
+        "Description": "Artificial Intelligence includes different topics: \r\n- Big Data Analysis enables organisations to analyse high-volume, high-velocity and/or high-variety information and data enabling enhanced insight, a more effective decision making, and process automation. \r\n- Data mining enables organisations to discover meaningful correlations and connections, patterns and trends by considering large amounts of data stored in databases and repositories. Data mining, as a fundamental pillar for Artificial Intelligence, employs pattern recognition technologies, as well as statistical and mathematical techniques.\r\n- Natural language processing (NLP) enables organisations to build machines that understand and respond to text or voice data-and respond with text or speech of their own-in much the same way humans do. By means of the parsing and semantic interpretation of text or voice data, it allows machines to learn, analyse, and understand human language.\r\n- Machine learning enables organisations to build applications learning from data and improving their accuracy over time without being programmed to do so.",
         "Digital_Public_Services": [
             {"Name": "Business Intelligence","ID": "http://data.europa.eu/dr8/egovera/BusinessIntelligengeBusinessService"}
         ]
@@ -139,6 +139,143 @@
             {"Name": "eTendering", "ID": "http://data.europa.eu/dr8/egovera/ETenderingBusinessService"},
             {"Name": "eSignature", "ID": "http://data.europa.eu/dr8/egovera/ESignatureBusinessService"}
         ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/EconomicEventsMonitoringCapability",
+        "Policy": "Taxes",
+        "Name": "Economic events monitoring",
+        "Description": "'Economic events monitoring' as a digital business capability refers to the ability of a business to use digital tools and technologies to track, analyze, and respond to economic events and trends. This includes monitoring changes in economic indicators, market trends, financial news, policy changes, and other relevant economic events. The capability enables businesses to make informed decisions, predict market movements, identify opportunities and risks, and adapt their strategies accordingly. It involves the use of digital technologies such as big data analytics, artificial intelligence, machine learning, and cloud computing.",
+        "Digital_Public_Services": [
+            {"Name": "Revenue tracking and analysis", "ID": "http://data.europa.eu/dr8/egovera/RevenueTrackingAndAnalysisBusinessService"},
+            {"Name": "Loans and mortgages registry management", "ID": "http://data.europa.eu/dr8/egovera/LoansAndMortgagesRegistryManagmenetBusinessService"},
+            {"Name": "Macro-economic framework", "ID": "http://data.europa.eu/dr8/egovera/Macro-economicFrameworkBusinessService"},
+            {"Name": "Financial flows management", "ID": "http://data.europa.eu/dr8/egovera/FinancialFlowsManagementBusinessService"},
+            {"Name": "Banking accounts monitoring", "ID": "http://data.europa.eu/dr8/egovera/BankinngAccountsMonitoringBusinessService"}
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/InternalInspectionAndAuditingCapability",
+        "Policy": "Taxes",
+        "Name": "Internal inspection and auditing",
+        "Description": "'Internal Inspection and Auditing' Digital Business Capability refers to the ability of an organization to use digital tools and technologies to conduct internal reviews and assessments of its operations, processes, and systems. This capability involves leveraging digital solutions to ensure compliance with internal policies and external regulations, identify potential risks or issues, and evaluate the effectiveness and efficiency of business activities. It may include functionalities such as automated auditing systems, real-time monitoring and reporting, data analytics for risk assessment, and digital platforms for audit management. This capability is crucial for maintaining operational integrity, enhancing transparency, and driving continuous improvement in the digital era.",
+        "Digital_Public_Services": [
+            {"Name": "Confiscated assets registry management", "ID": "http://data.europa.eu/dr8/egovera/ConfiscatedAssetsRegistryManagementBusinessService"},
+            {"Name": "Internal auditing", "ID": "http://data.europa.eu/dr8/egovera/InternalAuditingBusinessService"},
+            {"Name": "Tax Pre-Audit and Due-Diligence management", "ID": "http://data.europa.eu/dr8/egovera/TaxPre-AuditAndDue-DiligenceManagementBusinessService"},
+            {"Name": "Workforce allocation", "ID": "http://data.europa.eu/dr8/egovera/WorkforceAllocationBusinessService"},
+            {"Name": "Audit", "ID": "http://data.europa.eu/dr8/egovera/AuditBusinessService"},
+            {"Name": "Workflow Management", "ID": "http://data.europa.eu/dr8/egovera/WorkflowManagementBusinessService"},
+            {"Name": "Data Analytics", "ID": "http://data.europa.eu/dr8/egovera/DataAnalyticsBusinessService"}
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/InternationalTaxInformationCollectionCapability",
+        "Policy": "Taxes",
+        "Name": "International tax information collection",
+        "Description": "The 'International tax information collection' digital business capability refers to the ability of a business to leverage digital tools and technologies to gather, manage, and analyze tax-related data from international operations. This capability involves understanding and complying with various international tax laws and regulations, processing and storing large volumes of tax data securely, and using advanced analytics to derive insights for tax planning and decision-making. It also includes the ability to seamlessly integrate with other systems and processes, such as financial management and reporting, to ensure accurate and timely tax information collection and reporting. This capability is crucial for multinational businesses to ensure tax compliance, minimize tax risks, and optimize tax strategies across different countries.",
+        "Digital_Public_Services": [
+            {"Name": "Cross-border EU claims management", "ID": "http://data.europa.eu/dr8/egovera/Cross-borderEUClaimsManagementBusinessService"},
+            {"Name": "Third countries claims recovery", "ID": "http://data.europa.eu/dr8/egovera/ThirdCountriesClaimsRecoveryBusinessService"}
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/NationalTaxSystemGovernanceCapability",
+        "Policy": "Taxes",
+        "Name": "National Tax system governance",
+        "Description": "The 'National Tax System Governance' digital business capability refers to the ability of a government or national authority to effectively manage, regulate, and oversee its tax system using digital tools and technologies. This includes the ability to collect taxes, enforce tax laws, ensure compliance, manage taxpayer information, and provide online services for taxpayers. It also involves the use of data analytics for decision-making, risk assessment, and fraud detection. This capability is crucial for improving efficiency, transparency, and accountability in the administration of the national tax system.",
+        "Digital_Public_Services": [
+            {"Name": "Tangible assets registry management for properties", "ID": "http://data.europa.eu/dr8/egovera/TangibleAssetsRegistryManagementForPropertiesBusinessService"},
+            {"Name": "Economic activity codes registry management", "ID": "http://data.europa.eu/dr8/egovera/EconomicActivityCodesRegistryManagementBusinessService"},
+            {"Name": "Intangible assets registry management", "ID": "http://data.europa.eu/dr8/egovera/IntangibleAssetsRegistryManagementBusinessService"},
+            {"Name": "Tangible assets registry management for mobile assets", "ID": "http://data.europa.eu/dr8/egovera/TangibleAssetsRegistryManagementForMobileAssetsBusinessService"},
+            {"Name": "Heritages and rentings management", "ID": "http://data.europa.eu/dr8/egovera/HeritagesAndRentingsManagementBusinessService"},
+            {"Name": "European tax catalog management", "ID": "http://data.europa.eu/dr8/egovera/EuropeanTaxCatalogManagementBusinessService"},
+            {"Name": "State tax catalog management", "ID": "http://data.europa.eu/dr8/egovera/StateTaxCatalogManagementBusinessService"}
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/RevenueFeeCollectionForRegularAndSpecialCasesCapability",
+        "Policy": "Taxes",
+        "Name": "Revenue/Fee collection for regular and special cases",
+        "Description": "'Revenue/Fee collection for regular and special cases' is a digital business capability that involves the use of digital tools and technologies to manage and streamline the process of collecting payments or fees from customers or clients. This capability includes the ability to handle regular transactions, as well as special cases that may require unique processing or exceptions. It may involve the use of automated billing systems, digital payment platforms, and advanced analytics to track and manage revenue collection. This capability is crucial for ensuring the financial health of a business, improving cash flow, and enhancing customer service by making the payment process more efficient and user-friendly.",
+        "Digital_Public_Services": [
+            {"Name": "Property Tax calculation and payment", "ID": "http://data.europa.eu/dr8/egovera/PropertyTaxCalculationAndPaymentBusinessService"},
+            {"Name": "Environmental Tax calculation and payment", "ID": "http://data.europa.eu/dr8/egovera/EnvironmentalTaxCalculationAndPaymentBusinessService"},
+            {"Name": "Value Added Tax calculation and payment", "ID": "http://data.europa.eu/dr8/egovera/ValueAddedTaxCalculationAndPaymentBusinessService"},
+            {"Name": "Income Tax calculation and payment", "ID": "http://data.europa.eu/dr8/egovera/IncomeTaxCalculationAndPaymentBusinessService"},
+            {"Name": "Interests and penalties", "ID": "http://data.europa.eu/dr8/egovera/InterestsAndPenaltiesBusinessService"},
+            {"Name": "Excise Tax calculation and payment", "ID": "http://data.europa.eu/dr8/egovera/ExciseTaxCalculationAndPaymentBusinessService"},
+            {"Name": "ePayment ", "ID": "http://data.europa.eu/dr8/egovera/EPaymentBusinessService"},
+            {"Name": "eTendering ", "ID": "http://data.europa.eu/dr8/egovera/ETenderingBusinessService"}
+            
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/TaxHistoricalSeriesAnalysisAndTaxCasesManagementCapability",
+        "Policy": "Taxes",
+        "Name": "Tax historical series analysis and tax cases management",
+        "Description": "'Tax historical series analysis and tax cases management' is a digital business capability that involves the use of advanced digital tools and technologies to analyze historical tax data and manage tax cases. This capability allows businesses to track and analyze tax trends over time, identify patterns, and make informed decisions based on these insights. It also involves the management of tax cases, including the tracking, resolution, and documentation of tax issues. This capability can help businesses optimize their tax strategies, ensure compliance with tax laws, and effectively manage tax-related risks.",
+        "Digital_Public_Services": [
+            {"Name": "Tax history management", "ID": "http://data.europa.eu/dr8/egovera/TaxHistoryManagementBusinessService"}
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/TaxPlanningCapability",
+        "Policy": "Taxes",
+        "Name": "Tax planning",
+        "Description": "'Tax Planning' as a Digital Business Capability refers to the ability of an organization to leverage digital tools and technologies to effectively manage and optimize its tax obligations. This includes the use of software for tax computation, digital platforms for tax filing, and data analytics for identifying tax-saving opportunities. It also involves staying updated with the latest tax laws and regulations through digital channels. This capability not only ensures compliance with tax obligations but also aids in strategic decision-making by providing insights into potential tax implications of various business strategies.",
+        "Digital_Public_Services": [
+            {"Name": "MyTaxes", "ID": "http://data.europa.eu/dr8/egovera/MyTaxesBusinessService"},
+            {"Name": "Tax calendar", "ID": "http://data.europa.eu/dr8/egovera/TaxCalendarBusinessService"},
+            {"Name": "Partrimony analysis", "ID": "http://data.europa.eu/dr8/egovera/PartrimonyAnalysisBusinessService"}
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/TaxProfessionalsRegistryManagementCapability",
+        "Policy": "Taxes",
+        "Name": "Tax professionals registry management",
+        "Description": "'Tax professionals registry management' is a digital business capability that involves the use of technology to manage and maintain a comprehensive database or registry of tax professionals. This includes the ability to register new professionals, update information, track their credentials, and monitor their performance. It also involves ensuring the security and privacy of the data, as well as its accessibility for authorized users. This capability is crucial for regulatory compliance, quality assurance, and efficient service delivery in the tax industry.",
+        "Digital_Public_Services": [
+            {"Name": "Taxpayer registry management for private companies", "ID": "http://data.europa.eu/dr8/egovera/TaxpayerRegistryManagementForPrivateCompaniesBusinessService"},
+            {"Name": "Tax professionals and agents registry management", "ID": "http://data.europa.eu/dr8/egovera/TaxProfessionalsAndAgentsRegistryManagementBusinessService"},
+            {"Name": "Taxpayer registry management for public administrations", "ID": "http://data.europa.eu/dr8/egovera/TaxpayerRegistryManagementForPublicAdministrationsBusinessService"},
+            {"Name": "Fiscal professions and qualifications registry management", "ID": "http://data.europa.eu/dr8/egovera/FiscalProfessionsAndQualificationsRegistryManagementBusinessService"},
+            {"Name": "Taxpayer registry management for individuals", "ID": "http://data.europa.eu/dr8/egovera/TaxpayerRegistryManagementForIndividualsBusinessService"}
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/TaxRiskManagementCapability",
+        "Policy": "Taxes",
+        "Name": "Tax risk management",
+        "Description": "'Tax Risk Management' as a Digital Business Capability refers to the ability of a business to leverage digital tools and technologies to identify, assess, manage, and mitigate potential tax-related risks. This capability involves the use of digital systems to ensure compliance with various tax laws and regulations, accurately calculate tax liabilities, and optimize tax strategies. It also includes the ability to monitor changes in tax legislation, analyze their impact on the business, and adapt tax strategies accordingly. Through effective tax risk management, businesses can avoid penalties, reduce tax costs, and enhance their financial performance.",
+        "Digital_Public_Services": [
+            {"Name": "Anti-fraud management", "ID": "http://data.europa.eu/dr8/egovera/Anti-fraudManagementBusinessService"},
+            {"Name": "Secure Access Control", "ID": "http://data.europa.eu/dr8/egovera/SecureAccessControlBusinessService"},
+            {"Name": "Delegation of Power", "ID": "http://data.europa.eu/dr8/egovera/DelegationOfPowerBusinessService"}
+
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/TaxRulesManagementForProcessingTaxReturnsCapability",
+        "Policy": "Taxes",
+        "Name": "Tax rules management for processing tax returns",
+        "Description": "'Tax rules management for processing tax returns' is a digital business capability that involves the use of technology to manage and apply tax regulations and guidelines in the processing of tax returns. This capability includes the ability to interpret and implement changes in tax laws, accurately calculate tax liabilities or refunds, and ensure compliance with all relevant tax authorities. It may also involve the use of automation and artificial intelligence to streamline and improve the accuracy of tax return processing. This capability is crucial for businesses to manage their tax obligations efficiently and effectively, reducing risks of penalties and ensuring timely and accurate tax return submissions.",
+        "Digital_Public_Services": [
+            {"Name": "Tax returns control", "ID": "http://data.europa.eu/dr8/egovera/TaxReturnsControlBusinessService"},
+            {"Name": "Advance Tax ruling", "ID": "http://data.europa.eu/dr8/egovera/AdvanceTaxRulingBusinessService"},
+            {"Name": "Full taxable base discovery", "ID": "http://data.europa.eu/dr8/egovera/FullTaxableBaseDiscoveryBusinessService"}
+        ]
+    },
+    {
+        "ID": "http://data.europa.eu/dr8/egovera/TributaryJusticeManagementCapability",
+        "Policy": "Taxes",
+        "Name": "Tributary justice management",
+        "Description": "'Tributary Justice Management' as a Digital Business Capability refers to the use of digital tools and technologies to manage and oversee the processes related to tax justice. This includes the application of laws and regulations related to taxation, the resolution of tax disputes, and the enforcement of tax compliance. It involves the use of digital systems for data collection, analysis, and reporting, as well as for communication and collaboration among stakeholders. This capability can enhance the efficiency, transparency, and fairness of tax justice administration, thereby contributing to public trust and fiscal sustainability.",
+        "Digital_Public_Services": [
+            {"Name": "Dispute registry management", "ID": "http://data.europa.eu/dr8/egovera/DisputeRegistryManagementBusinessService"},
+            {"Name": "Dispute management", "ID": "http://data.europa.eu/dr8/egovera/DisputeManagementBusinessService"},
+            {"Name": "Tributary justice case management", "ID": "http://data.europa.eu/dr8/egovera/TributaryJusticeCaseManagementBusinessService"},
+            {"Name": "Tax claims management", "ID": "http://data.europa.eu/dr8/egovera/TaxClaimsManagementBusinessService"}
+        ]
     }
-    
 ]

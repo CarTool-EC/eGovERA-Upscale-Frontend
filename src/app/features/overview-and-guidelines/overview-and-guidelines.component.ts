@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-overview-and-guidelines',
   templateUrl: './overview-and-guidelines.component.html',
-  styleUrl: './overview-and-guidelines.component.scss'
+  styleUrl: './overview-and-guidelines.component.scss',
+  standalone: false
 })
 export class OverviewAndGuidelinesComponent {
 

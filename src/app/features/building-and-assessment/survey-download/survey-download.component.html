@@ -9,13 +9,22 @@
             </eui-card-header-title>
         </eui-card-header>
         <eui-card-content>
-            <p>
-                You have finalized the assessment survey. A JSON download will begin soon. You can also press the following button to download the document again:
-            </p>
+            <form [formGroup]="filename">
+                <div euiInputGroup>
+                    <label euiLabel>You have finalized the assessment survey. Please, provide a name for the assessment file and click download to save the file:</label>
+                    <input 
+                        euiInputText
+                        id="filename"
+                        formControlName="filename"
+                        placeholder="JSON file name"
+                    />
+                </div>
+            </form>
             <div>
                 <button
                     euiButton
                     euiPrimary
+                    [euiDisabled]="filename.status != 'VALID'"
                     (click)="downloadAssessmentJson()">
                     Download survey
                 </button>

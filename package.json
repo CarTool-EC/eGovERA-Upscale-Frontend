@@ -1,12 +1,11 @@
 {
-    "name": "eui-angular-app",
-    "version": "17.2.3",
-    "license": "EUPL-1.1",
+    "name": "eGovERAUpscaleFrontend",
+    "version": "19.3.8",
+    "license": "EUPL-1.2",
     "scripts": {
         "ng": "ng",
-        "start-mock-server": "nodemon --watch ./mock ./mock/server.js",
-        "start-serve": "eui-scripts serve-app --configuration=proxy-mock",
-        "start": "npm-run-all --parallel start-mock-server start-serve",
+        "start-serve": "eui-scripts serve-app --configuration=proxy",
+        "start": "npm-run-all start-serve",
         "dev": "ng serve --proxy-config proxy.conf.json",
         "prod": "ng serve --host 0.0.0.0 --proxy-config proxy.conf.json",
         "start-proxy": "eui-scripts serve-app --configuration=proxy",
@@ -18,11 +17,12 @@
         "build-prod-stats": "eui-scripts build-app --configuration=production-optimized --configEnvTarget=prod --statsJson",
         "app:build": "eui-scripts build-app",
         "app:inject-config": "eui-scripts inject-config-app",
-        "generate-changelog": "eui-scripts generate-changelog"
+        "generate-changelog": "eui-scripts generate-changelog",
+        "generate-sprite": "eui-scripts generate-sprite"
     },
     "private": true,
     "dependencies": {
-        "@eui/deps-base": "17.2.3",
+        "@eui/deps-base": "19.3.8",
         "@types/html2canvas": "^1.0.0",
         "@types/jspdf": "^2.0.0",
         "@types/vis": "^4.21.27",
@@ -32,5 +32,17 @@
         "jspdf-autotable": "^3.8.2",
         "ng2-charts": "^6.0.0",
         "vis-network": "^9.1.9"
+    },
+    "resolutions": {
+        "js-yaml": ">=3.13.1",
+        "pdfjs-dist": "4.10.38",
+        "tar": ">=6.2.1",
+        "katex": ">=0.16.10",
+        "follow-redirects": ">=1.15.4",
+        "word-wrap": ">=1.2.4",
+        "postcss": ">=8.4.31",
+        "semver": ">=7.5.2",
+        "express": "4.21.2",
+        "path-to-regexp": "1.9.0"
     }
 }

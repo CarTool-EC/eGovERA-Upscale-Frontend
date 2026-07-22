@@ -4,10 +4,19 @@ import { DigitalBusinessCapability } from '@shared/classes/DigitalBusinessCapabi
 import { DigitalPublicService } from '@shared/classes/DigitalPublicService.class';
 import { ResourcesService } from '@shared/services/resources.service';
 import { StorageService } from '@shared/services/storage.service';
+import { forkJoin } from 'rxjs';
+import { AppModule } from './app.module';
+import { SharedModule } from '@shared/shared.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
+    standalone: true,
+    imports: [SharedModule],
+    providers: [provideCharts(withDefaultRegisterables())]
 })
 export class AppComponent implements OnInit {
 
@@ -23,44 +32,26 @@ export class AppComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        // this.initializeResources();
-        this.initializeTestResources();
+        this.initializeResources();
+        // this.initializeTestResources();
     }
 
     private initializeResources(): void {
-        this.resourcesService.getABB().subscribe((data: any[]) => {
-            let abbList: ArchitectureBuildingBlock[] = [];
-            data.forEach((abb: ArchitectureBuildingBlock) => {
-                abbList.push(ArchitectureBuildingBlock.fromJson(abb));
-            });
-
-            this.storageService.parseABBs(abbList);
-            console.log('Initialized ABBs');
-            // console.log(abbList);
-        });
-
-        this.resourcesService.getDBC().subscribe((data: any[]) => {
-            let dbcList: DigitalBusinessCapability[] = [];
-            data.forEach((dbc: DigitalBusinessCapability) => {
-                dbcList.push(DigitalBusinessCapability.fromJson(dbc));
-            });
-
-            this.storageService.parseDBCs(dbcList);
-            console.log('Initialized DBCs');
-            // console.log(dbcList);
-        });
-
-        this.resourcesService.getDPS().subscribe((data: any[]) => {
-            let dpsList: DigitalPublicService[] = [];
-            data.forEach((dps: DigitalPublicService) => {
-                dpsList.push(DigitalPublicService.fromJson(dps));
-            });
-
-            this.storageService.parseDPSs(dpsList);
-            console.log('Initialized DPSs');
-            // console.log(dpsList);
+        forkJoin({
+            abbs: this.resourcesService.getABB(),
+            dbcs: this.resourcesService.getDBC(),
+            dpss: this.resourcesService.getDPS()
+        }).subscribe(({ abbs, dbcs, dpss }) => {
+            this.storageService.parseABBs(abbs.map(a => ArchitectureBuildingBlock.fromJson(a)));
+            console.log("Initialised ABBs")
+            this.storageService.parseDBCs(dbcs.map(d => DigitalBusinessCapability.fromJson(d)));
+            console.log("Initialised DBCs")
+            this.storageService.parseDPSs(dpss.map(d => DigitalPublicService.fromJson(d)));
+            console.log("Initialised DPSs")
         });
     }
+
+
 
     private initializeTestResources(): void {
         this.resourcesService.getTestABB().subscribe((lData: any[]) => {
@@ -70,7 +61,6 @@ export class AppComponent implements OnInit {
             });
 
             this.storageService.parseABBs(lABBList);
-            // console.log(lABBList);
             console.log('Initialized ABBs');
         });
 
@@ -81,7 +71,6 @@ export class AppComponent implements OnInit {
             });
 
             this.storageService.parseDBCs(lDBCList);
-            // console.log(lDBCList);
             console.log('Initialized DBCs');
         });
 
@@ -92,7 +81,6 @@ export class AppComponent implements OnInit {
             });
 
             this.storageService.parseDPSs(lDPSList);
-            // console.log(lDPSList);
             console.log('Initialized DPSs');
         });
     }

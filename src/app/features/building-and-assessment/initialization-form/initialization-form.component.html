@@ -68,19 +68,81 @@
                                         />
                                     </div>
                                 </div>
-                                <!-- <eui-feedback-message
-                                    euiWarning
-                                    *ngIf="!isFormValid()"
-                                    class="eui-u-mb-l">
-                                    To continue with the assessment fill the contact information form or load a previous survey
-                                </eui-feedback-message> -->
                             </div>
                         </form>
+                        <eui-card
+                            *ngIf="isUploadModelAvailable"
+                            class="eui-u-mb-s"
+                            euiPrimary
+                            >
+                            <eui-card-header [isHeaderMultilines]="true">
+                                <eui-card-header-title>
+                                    Requirement: <a target="_blank">Do you have the EIRA model of an ad-hoc digital business capability to be assessed?</a>
+                                </eui-card-header-title>
+                                <eui-card-header-subtitle>
+                                    Upload it here:
+                                    <eui-alert euiWarning style="margin-top: 1rem;">
+                                        <eui-alert-title>Model version</eui-alert-title>
+                                        The uploaded model must correspond to the latest version of the EIRA and eGovERA Foundation (i.e., version 6.1.0).
+                                    </eui-alert>
+                                </eui-card-header-subtitle>
+                            </eui-card-header>
+                            <eui-card-content>
+                            <eui-block-content role="presentation" ariaLabel="Nested block" [isBlocked]="isDeletingModel">
+                                <div class="eui-u-flex eui-u-flex-row" style="align-items: flex-start; gap: 1rem;">
+                                    <div>
+                                        <input 
+                                            #modelInput
+                                            hidden
+                                            onClick="this.value=null"
+                                            (change)="onModelUpload($event)"
+                                            type="file"
+                                        />
+                                        <button euiButton euiPrimary (click)="modelInput.click()" aria-haspopup="dialog" [euiDisabled]="loading">
+                                            {{ loading ? "Loading..." : "Upload model"}}
+                                        </button>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 5px">
+                                        <div *ngIf="modelsArray.length === 0">
+                                            No models uploaded yet
+                                        </div>
+                                        <div *ngFor="let model of modelsArray">
+                                            <div 
+                                                class="eui-u-flex eui-u-cursor-pointer"
+                                                (click)="removeModelFromList(model)"
+                                                style="align-items: center;"
+                                            >
+                                                <p class="eui-u-mb-none">{{ model.name }}</p>
+                                                <eui-icon-svg 
+                                                    icon="close" 
+                                                    set="outline" 
+                                                    size="s" 
+                                                    fillColor="grey-100">
+                                                </eui-icon-svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <eui-dialog #loadingDialog
+                                            [title]="'Uploading model...'"
+                                            (close)="onClose()"
+                                            [hasFooter]="false">
+                                    This process may take some time, please don’t reload the page.
+                                    <eui-block-content role="presentation" ariaLabel="Nested block" [isBlocked]="isUploadingModel">
+                                    </eui-block-content>
+                                </eui-dialog>
+                            </eui-block-content>
+                            </eui-card-content>
+
+                        </eui-card>
                         <form [formGroup]="businessDomainForm">
                             <div euiInputGroup class="row">
                                 <div class="col-9">
-                                    <div class="eui-u-flex eui-u-flex-justify-content-start eu-u-mt-s">
+                                    <div class="eui-u-flex eui-u-flex-justify-content-start eui-u-mt-s">
                                         <label euiLabel>Choose the eGovERA domains to be included in the assessment:</label>
+                                    </div>
+                                    <div class="eui-u-flex eui-u-flex-justify-content-start eui-u-ml-m">
+                                        <label class="eui-u-font-s" euiSubLabel *ngIf="lDBCByDomain?.customs.length == 0 || lDBCByDomain?.health.length == 0 || lDBCByDomain?.taxes.length == 0">*Some options may be disabled if no DBC is available for a specific domain.</label>
                                     </div>
                                     <div class="eui-u-flex eui-u-flex-wrap">
                                         <div class="eui-u-inline-flex eui-u-mt-s">
@@ -105,6 +167,7 @@
                                                 id="customs" 
                                                 name="customs"
                                                 value="customs"
+                                                [readonly]="lDBCByDomain?.customs.length == 0"
                                                 formControlName="customs"
                                             />
                                             <label
@@ -119,6 +182,7 @@
                                                 id="health" 
                                                 name="health"
                                                 value="health"
+                                                [readonly]="lDBCByDomain?.health.length == 0"
                                                 formControlName="health"
                                             />
                                             <label
@@ -133,11 +197,11 @@
                                                 id="taxes" 
                                                 name="taxes"
                                                 value="taxes"
+                                                [readonly]="lDBCByDomain?.taxes.length == 0"
                                                 formControlName="taxes"
                                             />
                                             <label
                                                 euiLabel
-                                                euiTooltip="test"
                                                 for="taxes">
                                                 Taxes
                                             </label>
@@ -153,17 +217,19 @@
                                 <button 
                                     euiButton 
                                     euiDanger
+                                    [euiDisabled]="loading"
                                     euiTooltip="To start with the assessment &#13; fill the contact information form or load a previous survey"
                                     class="eui-u-cursor-not-allowed">
-                                    Start the assessment
+                                    {{loading ? "Loading..." : "Start the assessment"}}
                                 </button>
                             </ng-container>
                             <ng-template #elseBlock>
                                 <button 
                                     euiButton 
                                     euiPrimary
+                                    [euiDisabled]="loading"        
                                     (click)="onStartAssessmentClick()">
-                                    Start the assessment
+                                    {{loading ? "Loading..." : "Start the assessment"}}
                                 </button>
                             </ng-template>
                             <input 
@@ -175,8 +241,9 @@
                             <button 
                                 euiButton 
                                 euiSecondary
+                                [euiDisabled]="loading"
                                 (click)="surveyInput.click()">
-                                Load previous work
+                                {{loading ? "Loading..." : "Load previous work"}}
                             </button>
                         </eui-card-footer-action-buttons>
                     </eui-card-footer>

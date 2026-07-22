@@ -12,36 +12,36 @@
                         <table euiTable euiTableResponsive hasStickyHeader [rows]="dataSource">
                             <ng-template euiTemplate="header">
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Domain</th>
-                                    <th>
+                                    <th class="eui-u-bg-color-info-100">Name</th>
+                                    <th class="eui-u-bg-color-info-100">Domain</th>
+                                    <th class="eui-u-bg-color-info-100">
                                         <span class="eui-u-cursor-help" euiTooltip="It reports the strategic priority assigned to the digital business capability by the national digital agenda of the country">
                                             Strategic Fit
-                                            <eui-icon-svg icon="eui-question-circle" set="eui" size="xs" fillColor="grey-100"></eui-icon-svg>
+                                            <eui-icon-svg icon="eui-question-circle" set="eui" size="xs" fillColor="primary-5"></eui-icon-svg>
                                         </span>
                                     </th>
-                                    <th>
+                                    <th class="eui-u-bg-color-info-100">
                                         <span class="eui-u-cursor-help" euiTooltip="It reports the ability to support the Digital Business Capability">
                                             Support Ability
-                                            <eui-icon-svg icon="eui-question-circle" set="eui" size="xs" fillColor="grey-100"></eui-icon-svg>
+                                            <eui-icon-svg icon="eui-question-circle" set="eui" size="xs" fillColor="primary-5"></eui-icon-svg>
                                         </span>
                                     </th>
-                                    <th>
+                                    <th class="eui-u-bg-color-info-100">
                                         <span class="eui-u-cursor-help" euiTooltip="It reports the target prospective ability to support the Digital Business Capability">
                                             Target Ability
-                                            <eui-icon-svg icon="eui-question-circle" set="eui" size="xs" fillColor="grey-100"></eui-icon-svg>
+                                            <eui-icon-svg icon="eui-question-circle" set="eui" size="xs" fillColor="primary-5"></eui-icon-svg>
                                         </span>
                                     </th>
-                                    <th>
+                                    <th class="eui-u-bg-color-info-100">
                                         <span class="eui-u-cursor-help" euiTooltip="It reports the expected beneficial impact (cost discounted) provided by the target prospective ability to support">
                                             Expected Public Value
-                                            <eui-icon-svg icon="eui-question-circle" set="eui" size="xs" fillColor="grey-100"></eui-icon-svg>
+                                            <eui-icon-svg icon="eui-question-circle" set="eui" size="xs" fillColor="primary-5"></eui-icon-svg>
                                         </span>
                                     </th>
-                                    <th>
+                                    <th class="eui-u-bg-color-info-100">
                                         <span class="eui-u-cursor-help" euiTooltip="It reports the amount of Euros (Million of Euros) to be allocated for the Digital Business Capabilities implementation">
                                             Estimated Budget (mill €)
-                                            <eui-icon-svg icon="eui-question-circle" set="eui" size="xs" fillColor="grey-100"></eui-icon-svg>
+                                            <eui-icon-svg icon="eui-question-circle" set="eui" size="xs" fillColor="primary-5"></eui-icon-svg>
                                         </span>
                                     </th>
                                 </tr>
@@ -138,7 +138,7 @@
                                     </td>
                                     <td data-col-label="Estimated Budget (mill €)">
                                         <div class="eui-u-flex eui-u-flex-justify-content-start">
-                                            Total Budget: <span class="eui-u-ml-s eui-u-mr-m eui-u-font-bold">{{ totalBudget }}</span> mill €
+                                            Total Budget: <span class="eui-u-ml-s eui-u-mr-m eui-u-f-bold">{{ totalBudget }}</span> mill €
                                         </div>
                                     </td>
                                 </tr>
@@ -214,7 +214,7 @@
                                 {{filterForm.value['StrategicFitStart']}}
                             </div>
                             <div>
-                                <mat-slider min="1" max="5" step="0.1">
+                                <mat-slider min="1" max="5" step="1">
                                     <input matSliderStartThumb formControlName="StrategicFitStart"
                                         (change)="onSliderFilterChange()">
                                     <input matSliderEndThumb formControlName="StrategicFitEnd"
